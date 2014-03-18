@@ -4,12 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JPasswordField;
+
+import org.omg.CORBA.ExceptionList;
 
 
 public class login_gui {
@@ -72,7 +75,7 @@ public class login_gui {
 		btnZamknij.setBounds(20, 110, 108, 29);
 		frame.getContentPane().add(btnZamknij);
 		
-		final JLabel pesel_blad_znak = new JLabel("Bl\u0119dny pesel.");
+		final JLabel pesel_blad_znak = new JLabel("B\u0142\u0119dny pesel");
 		pesel_blad_znak.setEnabled(false);
 		pesel_blad_znak.setVisible(false);
 		pesel_blad_znak.setBounds(79, 23, 108, 14);
@@ -82,6 +85,12 @@ public class login_gui {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(69, 76, 154, 20);
 		frame.getContentPane().add(passwordField);
+		
+		final JLabel lblPassword = new JLabel("B\u0142\u0119dne\r\n has\u0142o");
+		lblPassword.setEnabled(false);
+		lblPassword.setBounds(178, 23, 86, 14);
+		frame.getContentPane().add(lblPassword);
+		lblPassword.setVisible(false);
 		
 		JButton btnZaloguj = new JButton("Zaloguj");
 		btnZaloguj.addActionListener(new ActionListener() {
@@ -98,8 +107,16 @@ public class login_gui {
 					{
 						pesel_blad_znak.setVisible(true);
 						
-					}					
-						
+					}			
+					char[] password = passwordField.getPassword();
+					try{
+						//isPasswordCorret(password); metoda sprawdza poprawnosc hasla
+					}
+					catch(Exception ex)
+					{
+						lblPassword.setVisible(true);
+					}
+					
 				
 					
 			
@@ -107,6 +124,8 @@ public class login_gui {
 		});
 		btnZaloguj.setBounds(156, 110, 108, 29);
 		frame.getContentPane().add(btnZaloguj);
+		
+	
 		
 		
 	}
