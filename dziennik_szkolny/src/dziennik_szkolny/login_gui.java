@@ -9,13 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 
 public class login_gui {
 
 	private JFrame frame;
 	private JTextField txt_pesel;
-	private JTextField txt_haslo;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -58,13 +59,8 @@ public class login_gui {
 		lblPesel.setBounds(10, 50, 69, 17);
 		frame.getContentPane().add(lblPesel);
 		
-		txt_haslo = new JTextField();
-		txt_haslo.setColumns(10);
-		txt_haslo.setBounds(69, 79, 154, 20);
-		frame.getContentPane().add(txt_haslo);
-		
 		JLabel lblHaso = new JLabel("Has\u0142o");
-		lblHaso.setBounds(10, 78, 69, 17);
+		lblHaso.setBounds(10, 78, 45, 17);
 		frame.getContentPane().add(lblHaso);
 		/**Zaymaknie Okienka Logowania**/
 		JButton btnZamknij = new JButton("Zamknij");
@@ -76,8 +72,42 @@ public class login_gui {
 		btnZamknij.setBounds(20, 110, 108, 29);
 		frame.getContentPane().add(btnZamknij);
 		
+		final JLabel pesel_blad_znak = new JLabel("Bl\u0119dny pesel.");
+		pesel_blad_znak.setEnabled(false);
+		pesel_blad_znak.setVisible(false);
+		pesel_blad_znak.setBounds(79, 23, 108, 14);
+		frame.getContentPane().add(pesel_blad_znak);
+		
+
+		passwordField = new JPasswordField();
+		passwordField.setBounds(69, 76, 154, 20);
+		frame.getContentPane().add(passwordField);
+		
 		JButton btnZaloguj = new JButton("Zaloguj");
+		btnZaloguj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				/**Obsluga wpisania poprawnego numeru pesel tj 11 cyfr**/
+					try{
+						pesel_blad_znak.setVisible(false);
+						long pesel = Long.parseLong(txt_pesel.getText());
+						if(txt_pesel.getText().length() != 11)
+							throw new NumberFormatException();
+						System.out.println(pesel);
+					}
+					catch(NumberFormatException ex)
+					{
+						pesel_blad_znak.setVisible(true);
+						
+					}					
+						
+				
+					
+			
+			}
+		});
 		btnZaloguj.setBounds(156, 110, 108, 29);
 		frame.getContentPane().add(btnZaloguj);
+		
+		
 	}
 }
