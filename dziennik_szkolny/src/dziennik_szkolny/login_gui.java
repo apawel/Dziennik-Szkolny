@@ -15,7 +15,7 @@ import javax.swing.JPasswordField;
 import org.omg.CORBA.ExceptionList;
 
 
-public class login_gui {
+public class Login_GUI {
 
 	private JFrame frame;
 	private JTextField txt_pesel;
@@ -28,7 +28,7 @@ public class login_gui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login_gui window = new login_gui();
+					Login_GUI window = new Login_GUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class login_gui {
 	/**
 	 * Create the application.
 	 */
-	public login_gui() {
+	public Login_GUI() {
 		initialize();
 	}
 
