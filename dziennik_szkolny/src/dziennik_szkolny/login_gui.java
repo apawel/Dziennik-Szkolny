@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
 import org.omg.CORBA.ExceptionList;
+import javax.swing.JComboBox;
 
 
 public class Login_GUI {
@@ -49,7 +50,7 @@ public class Login_GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 290, 192);
+		frame.setBounds(100, 100, 290, 226);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -72,7 +73,7 @@ public class Login_GUI {
 			frame.dispose();
 			}
 		});
-		btnZamknij.setBounds(20, 110, 108, 29);
+		btnZamknij.setBounds(20, 147, 108, 29);
 		frame.getContentPane().add(btnZamknij);
 		
 		final JLabel pesel_blad_znak = new JLabel("B\u0142\u0119dny pesel");
@@ -122,8 +123,13 @@ public class Login_GUI {
 			
 			}
 		});
-		btnZaloguj.setBounds(156, 110, 108, 29);
+		btnZaloguj.setBounds(156, 147, 108, 29);
 		frame.getContentPane().add(btnZaloguj);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.setBounds(69, 107, 154, 20);
+		frame.getContentPane().add(comboBox);
 		
 	
 		

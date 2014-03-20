@@ -55,7 +55,7 @@ public class Class_GUI extends JFrame {
 		lblNazwaklasy.setEnabled(false);
 		lblNazwaklasy.setBounds(81, 11, 69, 14);
 		contentPane.add(lblNazwaklasy);
-		
+		/*warunek jeœli zalogowany jako wychowawca to przenies do Student_GUI a jesli jako nauczyciel to do Student_Subject_GUI*/
 		JButton btnWybierzUcznia = new JButton("Wybierz ucznia");
 		btnWybierzUcznia.setBounds(252, 227, 155, 23);
 		contentPane.add(btnWybierzUcznia);

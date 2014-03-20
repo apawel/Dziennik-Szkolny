@@ -33,7 +33,7 @@ public class Student_GUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 to widoczne tez dla wychowawcy po kliknieciu wybierz ucznia z class_gui
 	 */
 	public Student_GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,7 +57,7 @@ public class Student_GUI extends JFrame {
 		contentPane.add(list);
 		
 		JButton btnUwagi = new JButton("Uwagi");
-		btnUwagi.setBounds(287, 216, 89, 23);
+		btnUwagi.setBounds(286, 216, 89, 23);
 		contentPane.add(btnUwagi);
 	}
 }
