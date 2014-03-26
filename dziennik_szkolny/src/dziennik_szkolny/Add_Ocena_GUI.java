@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Add_Ocena_GUI extends JFrame {
 
@@ -49,12 +51,29 @@ public class Add_Ocena_GUI extends JFrame {
 		contentPane.add(btnDodaj);
 		
 		JButton btnAnuluj = new JButton("Anuluj");
+		btnAnuluj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			dispose();
+				
+			}
+		});
 		btnAnuluj.setBounds(22, 109, 89, 23);
 		contentPane.add(btnAnuluj);
 		
+		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(78, 22, 46, 20);
+		comboBox.setBounds(88, 22, 46, 20);
 		contentPane.add(comboBox);
+		comboBox.addItem(1.0);
+		comboBox.addItem(2.0);
+		comboBox.addItem(2.5);
+		comboBox.addItem(3.0);
+		comboBox.addItem(3.5);
+		comboBox.addItem(4.0);
+		comboBox.addItem(4.5);
+		comboBox.addItem(5.0);
+		comboBox.addItem(5.5);
+		comboBox.addItem(6.0);
 		
 		JLabel lblOcena = new JLabel("Ocena");
 		lblOcena.setBounds(22, 25, 46, 14);
@@ -66,16 +85,16 @@ public class Add_Ocena_GUI extends JFrame {
 		
 		textField = new JTextField();
 		textField.setText("1");
-		textField.setBounds(78, 53, 46, 20);
+		textField.setBounds(88, 53, 46, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblKomentarz = new JLabel("Komentarz");
-		lblKomentarz.setBounds(22, 81, 60, 14);
+		lblKomentarz.setBounds(22, 81, 72, 14);
 		contentPane.add(lblKomentarz);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(78, 78, 137, 20);
+		textField_1.setBounds(88, 78, 137, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 	}

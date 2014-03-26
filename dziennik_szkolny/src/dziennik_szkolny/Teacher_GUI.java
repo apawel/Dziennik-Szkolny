@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Teacher_GUI extends JFrame {
 
@@ -60,6 +62,11 @@ public class Teacher_GUI extends JFrame {
 		contentPane.add(lblKlasa);
 		
 		JButton btnDalej = new JButton("Dalej");
+		btnDalej.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Class_GUI a = new Class_GUI("Wybrana nazwa klasy");
+			}
+		});
 		btnDalej.setBounds(212, 80, 89, 23);
 		contentPane.add(btnDalej);
 		

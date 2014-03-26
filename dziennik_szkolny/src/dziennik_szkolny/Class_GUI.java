@@ -10,6 +10,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Class_GUI extends JFrame {
 
@@ -19,23 +21,14 @@ public class Class_GUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Class_GUI frame = new Class_GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public Class_GUI() {
+	public Class_GUI(String nazwa) {
+		super(nazwa);
+		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -61,6 +54,11 @@ public class Class_GUI extends JFrame {
 		contentPane.add(btnWybierzUcznia);
 		
 		JButton btnWr = new JButton("Wr\u00F3\u0107");
+		btnWr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnWr.setBounds(20, 227, 130, 23);
 		contentPane.add(btnWr);
 	}
