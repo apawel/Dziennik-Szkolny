@@ -13,7 +13,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
 import org.omg.CORBA.ExceptionList;
+
 import javax.swing.JComboBox;
+import javax.swing.plaf.basic.ComboPopup;
 
 
 public class Login_GUI {
@@ -21,6 +23,9 @@ public class Login_GUI {
 	private JFrame frame;
 	private JTextField txt_pesel;
 	private JPasswordField passwordField;
+	
+	private enum Wybor {    Uczen, Nauczyciel, Wychowawca;
+	}
 
 	/**
 	 * Launch the application.
@@ -28,7 +33,7 @@ public class Login_GUI {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {					
 					Login_GUI window = new Login_GUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -82,6 +87,13 @@ public class Login_GUI {
 		pesel_blad_znak.setBounds(79, 23, 108, 14);
 		frame.getContentPane().add(pesel_blad_znak);
 		
+		final JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(69, 107, 154, 20);
+		frame.getContentPane().add(comboBox);
+		comboBox.addItem("Uczen");
+		comboBox.addItem("Nauczyciel");
+		comboBox.addItem("Wychowawca");
+		
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(69, 76, 154, 20);
@@ -96,13 +108,33 @@ public class Login_GUI {
 		JButton btnZaloguj = new JButton("Zaloguj");
 		btnZaloguj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
+				
+
+			String wybrane = (String)comboBox.getSelectedItem();	
+           Wybor fruit = Wybor.valueOf(wybrane);
+
+					switch(fruit) {
+					    case Uczen:
+					    	System.out.println("jestem w uczniu otwieram moje okno z ocenami");
+					    	Student_GUI student = new Student_GUI("nazwa studenta");
+					        
+					        break;
+					    case Nauczyciel:
+					    	Teacher_GUI teacher = new Teacher_GUI("nazwa nauczyciela");
+					    	System.out.println("jestem w nauczycielu , otwieram jego przedmiot i powiazane klasy");					       
+					        break;
+					    case Wychowawca:
+					    	Class_GUI klasa = new Class_GUI("nazwa klasy tego wychowawcy");
+					    	System.out.println("jestem w wychowawcy. otwieram jego klase");
+					    	break;
+					}
+			
 				/**Obsluga wpisania poprawnego numeru pesel tj 11 cyfr**/
 					try{
 						pesel_blad_znak.setVisible(false);
 						long pesel = Long.parseLong(txt_pesel.getText());
 						if(txt_pesel.getText().length() != 11)
 							throw new NumberFormatException();
-						System.out.println(pesel);
 					}
 					catch(NumberFormatException ex)
 					{
@@ -126,11 +158,7 @@ public class Login_GUI {
 		btnZaloguj.setBounds(156, 147, 108, 29);
 		frame.getContentPane().add(btnZaloguj);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setEditable(true);
-		comboBox.setBounds(69, 107, 154, 20);
-		frame.getContentPane().add(comboBox);
-		
+
 	
 		
 		

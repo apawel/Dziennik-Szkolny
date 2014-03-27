@@ -50,6 +50,14 @@ public class Class_GUI extends JFrame {
 		contentPane.add(lblNazwaklasy);
 		/*warunek jeœli zalogowany jako wychowawca to przenies do Student_GUI a jesli jako nauczyciel to do Student_Subject_GUI*/
 		JButton btnWybierzUcznia = new JButton("Wybierz ucznia");
+		btnWybierzUcznia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//if(nauczyciel)
+				Student_Subject_GUI uczen_przedmiot = new Student_Subject_GUI("nazwa ucznia + nazwa przedmiotu");
+				//else if(wychowca)
+				Student_GUI student = new Student_GUI("nazwa Studenta");
+			}
+		});
 		btnWybierzUcznia.setBounds(252, 227, 155, 23);
 		contentPane.add(btnWybierzUcznia);
 		

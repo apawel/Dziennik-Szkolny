@@ -17,35 +17,18 @@ public class Teacher_GUI extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Teacher_GUI frame = new Teacher_GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Teacher_GUI() {
+	public Teacher_GUI(String nazwa) {
+		super(nazwa);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 324, 150);
+		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblPrzedmiot = new JLabel("Przedmiot");
-		lblPrzedmiot.setBounds(10, 11, 47, 20);
+		lblPrzedmiot.setBounds(10, 11, 72, 20);
 		contentPane.add(lblPrzedmiot);
 		
 		JLabel lbl_prowadzonyprzeznauczycielaprzedmiot = new JLabel("prowadzony_przez_nauczyciela_przedmiot");
