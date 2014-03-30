@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-03-29 15:18:46 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Klasa" table="Klasa" catalog="plysiu_apawel">
+        <id name="idKlasa" type="java.lang.Integer">
+            <column name="idKlasa" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="nauczyciel" class="model.Nauczyciel" fetch="select">
+            <column name="wychowawca" unique="true" />
+        </many-to-one>
+        <property name="nazwa" type="string">
+            <column name="nazwa" length="45" not-null="true" />
+        </property>
+        <property name="rozpoczecie" type="date">
+            <column name="rozpoczecie" length="0" not-null="true" />
+        </property>
+        <property name="zakonczenie" type="date">
+            <column name="zakonczenie" length="0" not-null="true" />
+        </property>
+        <set name="klasaHasPrzedmiots" table="Klasa_has_Przedmiot" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Klasa_idKlasa" not-null="true" />
+            </key>
+            <one-to-many class="model.KlasaHasPrzedmiot" />
+        </set>
+        <set name="uczens" table="Klasa_has_Uczen" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="Klasa_idKlasa" not-null="true" />
+            </key>
+            <many-to-many entity-name="model.Uczen">
+                <column name="Uczen_idUczen" not-null="true" unique="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

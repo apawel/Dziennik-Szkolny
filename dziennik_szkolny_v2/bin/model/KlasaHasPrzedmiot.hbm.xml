@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-03-29 15:18:46 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.KlasaHasPrzedmiot" table="Klasa_has_Przedmiot" catalog="plysiu_apawel">
+        <id name="klasaHasPrzedmiotId" type="java.lang.Integer">
+            <column name="Klasa_has_PrzedmiotID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="przedmiot" class="model.Przedmiot" fetch="select">
+            <column name="Przedmiot_idPrzedmiot" not-null="true" />
+        </many-to-one>
+        <many-to-one name="klasa" class="model.Klasa" fetch="select">
+            <column name="Klasa_idKlasa" not-null="true" />
+        </many-to-one>
+        <set name="ocenies" table="Oceny" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Klasa_has_Przedmiot_Klasa_has_PrzedmiotID" not-null="true" />
+            </key>
+            <one-to-many class="model.Oceny" />
+        </set>
+    </class>
+</hibernate-mapping>
