@@ -14,6 +14,10 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 public class ManageStudentNote {
+	public ManageStudentNote()
+	{
+		
+	}
 
 	 /* Method to CREATE an StudentNote in the database */
 	   public Integer addStudentNote(Teacher teacher, Student student, String noteContents){

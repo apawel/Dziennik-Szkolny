@@ -10,6 +10,9 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 public class ManageSubject {
+	
+	public ManageSubject()
+	{}
 	/* Method to DELETE an subject from the records */
 	   public Integer addSubject(String name){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
@@ -45,5 +48,43 @@ public class ManageSubject {
 	         session.close(); 
 	      }
 	   }
+	   
+	   public Subject getSubject(Integer subjectID){
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;
+		      Subject subject = null;
+		      try{
+		         tx = session.beginTransaction();
+		         subject =  (Subject)session.get(Subject.class, subjectID); 
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+		         return subject;
+		      
+	   }
+	 /*  
+	   public Subject getSubject(String name){
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;
+		      Subject subject = null;
+		      try{
+		         tx = session.beginTransaction();
+		         subject =  (Subject)session.get(Subject.class, subjectID); 
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+		         return subject;
+		      
+	   }*/
 
 }

@@ -30,6 +30,13 @@
         <property name="hbm2ddl.auto">update</property>
         
         
+          <mapping resource="model/SchoolClass.hbm.xml"/>
+          <mapping resource="model/Student.hbm.xml"/>
+          <mapping resource="model/StudentNote.hbm.xml"/>
+          <mapping resource="model/Subject.hbm.xml"/>
+          <mapping resource="model/SubjectMark.hbm.xml"/>
+          <mapping resource="model/Teacher.hbm.xml"/>
+        
 
 
     </session-factory>

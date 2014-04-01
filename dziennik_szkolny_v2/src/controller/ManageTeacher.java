@@ -11,6 +11,10 @@ import model.Subject;
 import model.Teacher;
 
 public class ManageTeacher {
+public ManageTeacher()
+{
+	
+}
 	
 	
 	 /* Method to CREATE an teacher in the database */
@@ -48,6 +52,25 @@ public class ManageTeacher {
 	      }finally {
 	         session.close(); 
 	      }
+	   }
+	   /* Method to GET an teacher from the records */
+	   public Teacher getSubject(Integer teacherID){
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;
+		      Teacher teacher = null;
+		      try{
+		         tx = session.beginTransaction();
+		         teacher =  (Teacher)session.get(Teacher.class, teacherID); 		
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+		         return teacher;
+		      
 	   }
 
 }

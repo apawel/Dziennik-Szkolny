@@ -12,6 +12,10 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 public class ManageStudent {
+	public ManageStudent()
+	{
+		
+	}
 	/* Method to DELETE an student from the records */
 	  public Integer addStudent(SchoolClass schoolClass, String firstName, String lastName,
 				String personalIdentityNumber, String password, Date dateOfBirth,

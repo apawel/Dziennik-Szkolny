@@ -13,7 +13,7 @@
 
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password">NIEPODAM</property>
+        <property name="hibernate.connection.password">NIE PODAM</property>
         <property name="hibernate.connection.url">jdbc:mysql://dev.uek.krakow.pl:3306/plysiu_apawel?useUnicode=true&amp;characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">plysiu</property>
         <!-- JDBC connection pool (use the built-in) -->
@@ -29,6 +29,13 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
         
+        
+          <mapping resource="model/SchoolClass.hbm.xml"/>
+          <mapping resource="model/Student.hbm.xml"/>
+          <mapping resource="model/StudentNote.hbm.xml"/>
+          <mapping resource="model/Subject.hbm.xml"/>
+          <mapping resource="model/SubjectMark.hbm.xml"/>
+          <mapping resource="model/Teacher.hbm.xml"/>
         
 
 

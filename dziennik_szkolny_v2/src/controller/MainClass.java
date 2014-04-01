@@ -10,8 +10,21 @@ public class MainClass {
 
 	public static void main(String[] args) {
 	
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.close();
+		ManageSubject MS = new ManageSubject();
+		MS.addSubject("Matematyka");
+		MS.addSubject("Fizyka");
+		MS.addSubject("Chemia");
+		MS.addSubject("Polski");
+		MS.addSubject("Angielski");
+		MS.addSubject("Niemiecki");
+		MS.addSubject("Biologia");
+		MS.addSubject("WF");
+		
+		ManageTeacher MT = new ManageTeacher();
+		MT.addTeacher(MS.getSubject(1), "Pawe³", "Wojciechowski", "92062410079", "1234", "Kraków, Czarnowiejska 15");
+		MT.addTeacher(MS.getSubject(1), "Przemys³aw", "P³yœ", "12345678910", "4321", "Kraków, Rynek G³ówny 15/2");
+		MT.addTeacher(MS.getSubject(2), "Adam", "Nowak", "01234567891", "4321", "Siepraw, D³uga 15/2");
+		MT.addTeacher(MS.getSubject(3), "Przemys³aw", "P³yœ", "00123456789", "4321", "Zakopane, Krótka 15/2");
 		
 /*
 		

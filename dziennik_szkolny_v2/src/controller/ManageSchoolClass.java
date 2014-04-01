@@ -12,6 +12,10 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 public class ManageSchoolClass {
+	public ManageSchoolClass()
+	{
+		
+	}
 	
 	 /* Method to CREATE an SchoolClass in the database */
 	   public Integer addSchoolClass(Teacher teacher, String name, Date yearStart,Date yearEnd){

@@ -12,6 +12,10 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 public class ManageSubjectMark {
+	public ManageSubjectMark()
+	{
+		
+	}
 	
 
 	 /* Method to CREATE an SubjectMark in the database */
