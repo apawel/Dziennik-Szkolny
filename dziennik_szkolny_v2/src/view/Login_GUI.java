@@ -2,6 +2,9 @@ package view;
 
 import java.awt.EventQueue;
 
+import model.*;
+import controller.*;
+
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -9,10 +12,14 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JPasswordField;
 
 import org.omg.CORBA.ExceptionList;
+
+import antlr.collections.List;
+import controller.ManageTeacher;
 
 import javax.swing.JComboBox;
 import javax.swing.plaf.basic.ComboPopup;
@@ -53,6 +60,18 @@ public class Login_GUI {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	public boolean isCorrect(char [] passDB,char[] passtxt)
+	{
+		if(passDB.length != passtxt.length)
+			return false;
+		for(int i =0 ;i<passDB.length;i++)
+		{
+			if(passDB[i] != passtxt[i])
+				return false;
+		}
+		return true;
+	
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 290, 226);
@@ -104,6 +123,7 @@ public class Login_GUI {
 		lblPassword.setBounds(178, 23, 86, 14);
 		frame.getContentPane().add(lblPassword);
 		lblPassword.setVisible(false);
+	
 		
 		JButton btnZaloguj = new JButton("Zaloguj");
 		btnZaloguj.addActionListener(new ActionListener() {
@@ -120,35 +140,56 @@ public class Login_GUI {
 					        
 					        break;
 					    case Nauczyciel:
-					    	Teacher_GUI teacher = new Teacher_GUI("nazwa nauczyciela");
-					    	System.out.println("jestem w nauczycielu , otwieram jego przedmiot i powiazane klasy");					       
+					    	boolean passcorrect =  false;
+					    	Teacher teacher = null;
+					    	try{
+								pesel_blad_znak.setVisible(false);
+								lblPassword.setVisible(false);								
+								if(txt_pesel.getText().length() != 11)
+									throw new NumberFormatException();
+			
+						    	ManageTeacher MT = new ManageTeacher();
+						    	ArrayList<Teacher> teachers = (ArrayList<Teacher>) MT.getAllTeachers();
+						    	int i;
+						    	char[] password = passwordField.getPassword();
+						    	for(i =0;i<teachers.size();i++)
+						    	{
+						    		if(teachers.get(i).getPersonalIdentityNumber().equals(txt_pesel.getText()))
+						    		{
+						    			if(isCorrect(teachers.get(i).getPassword().toCharArray(),password))
+							    			passcorrect = true;	
+						    			else
+						    				throw new Exception();						    				
+						    			break;	
+						    		}
+						    		if(i==teachers.size()-1)
+						    			throw new NumberFormatException();
+						    	}
+								teacher=teachers.get(i);		    
+						 
+							}
+							catch(NumberFormatException ex)
+							{
+								pesel_blad_znak.setVisible(true);
+								
+							}		
+					    	catch(Exception ex)
+							{
+								lblPassword.setVisible(true);
+							}
+					    	
+					    	 if(passcorrect)
+					    	 {
+					    		 Teacher_GUI teacher_gui = new Teacher_GUI(teacher);
+					    	 }
+					    		 
 					        break;
 					    case Wychowawca:
 					    	Class_GUI klasa = new Class_GUI("nazwa klasy tego wychowawcy");
 					    	System.out.println("jestem w wychowawcy. otwieram jego klase");
 					    	break;
 					}
-			
-				/**Obsluga wpisania poprawnego numeru pesel tj 11 cyfr**/
-					try{
-						pesel_blad_znak.setVisible(false);
-						long pesel = Long.parseLong(txt_pesel.getText());
-						if(txt_pesel.getText().length() != 11)
-							throw new NumberFormatException();
-					}
-					catch(NumberFormatException ex)
-					{
-						pesel_blad_znak.setVisible(true);
-						
-					}			
-					char[] password = passwordField.getPassword();
-					try{
-						//isPasswordCorret(password); metoda sprawdza poprawnosc hasla
-					}
-					catch(Exception ex)
-					{
-						lblPassword.setVisible(true);
-					}
+					
 					
 				
 					

@@ -2,6 +2,8 @@ package controller;
 
 
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -71,6 +73,27 @@ public ManageTeacher()
 		      }
 		         return teacher;
 		      
+	   }
+	   /* Method to GET all teachers from the DB */
+	   @SuppressWarnings("unchecked")
+	public List<Teacher> getAllTeachers()
+	   {
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;
+		      List<Teacher> teachers = null;
+		      try{
+		         tx = session.beginTransaction();
+		         teachers  = (List<Teacher>) session.createQuery("from Teacher").list();				
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+		         return teachers;
+		   
 	   }
 
 }

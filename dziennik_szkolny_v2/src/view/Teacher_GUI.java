@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
+import model.Teacher;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -17,8 +20,8 @@ public class Teacher_GUI extends JFrame {
 
 	private JPanel contentPane;
 
-	public Teacher_GUI(String nazwa) {
-		super(nazwa);
+	public Teacher_GUI(Teacher teacher) {
+		super(teacher.getFirstName() + " " +teacher.getLastName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 324, 150);
 		setVisible(true);
@@ -30,8 +33,8 @@ public class Teacher_GUI extends JFrame {
 		JLabel lblPrzedmiot = new JLabel("Przedmiot");
 		lblPrzedmiot.setBounds(10, 11, 72, 20);
 		contentPane.add(lblPrzedmiot);
-		
-		JLabel lbl_prowadzonyprzeznauczycielaprzedmiot = new JLabel("prowadzony_przez_nauczyciela_przedmiot");
+		/*Trzeba pobrac ten przedmiot gdzie id w bazie techara jesgo jest :D*/
+		JLabel lbl_prowadzonyprzeznauczycielaprzedmiot = new JLabel("s");
 		lbl_prowadzonyprzeznauczycielaprzedmiot.setEnabled(false);
 		lbl_prowadzonyprzeznauczycielaprzedmiot.setBounds(80, 14, 222, 14);
 		contentPane.add(lbl_prowadzonyprzeznauczycielaprzedmiot);
