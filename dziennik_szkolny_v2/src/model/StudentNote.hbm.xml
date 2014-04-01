@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-04-01 13:32:49 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="model.StudentNote" table="StudentNote" catalog="plysiu_apawel">
+        <id name="idStudentNote" type="java.lang.Integer">
+            <column name="idStudentNote" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="teacher" class="model.Teacher" fetch="select">
+            <column name="Teacher_idTeacher" not-null="true" />
+        </many-to-one>
+        <many-to-one name="student" class="model.Student" fetch="select">
+            <column name="Student_idStudent" not-null="true" />
+        </many-to-one>
+        <property name="noteContents" type="string">
+            <column name="noteContents" length="65535" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

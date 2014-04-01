@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-04-01 13:32:49 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="model.Teacher" table="Teacher" catalog="plysiu_apawel">
+        <id name="idTeacher" type="java.lang.Integer">
+            <column name="idTeacher" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="subject" class="model.Subject" fetch="select">
+            <column name="Subject_idSubject" not-null="true" />
+        </many-to-one>
+        <property name="firstName" type="string">
+            <column name="firstName" length="45" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="45" not-null="true" />
+        </property>
+        <property name="personalIdentityNumber" type="string">
+            <column name="personalIdentityNumber" length="11" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="45" not-null="true" />
+        </property>
+        <set name="studentNotes" table="StudentNote" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Teacher_idTeacher" not-null="true" />
+            </key>
+            <one-to-many class="model.StudentNote" />
+        </set>
+    </class>
+</hibernate-mapping>
