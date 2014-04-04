@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,9 +11,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 
+import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class AdminGUI extends JFrame {
 
-	private JPanel contentPane;
+	private Container contentPane;
+	private CardLayout layout;
 
 	/**
 	 * Launch the application.
@@ -34,8 +40,14 @@ public class AdminGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AdminGUI() {
+		super("Panel Admina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 300);
+		
+		layout = new CardLayout();
+		getContentPane().setLayout(layout);
+		contentPane = this.getContentPane();
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -44,9 +56,19 @@ public class AdminGUI extends JFrame {
 		menuBar.add(mnDodaj);
 		
 		JMenuItem mntmPrzedmiot = new JMenuItem("Przedmiot");
+		mntmPrzedmiot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane, "Przedmiot");
+			}
+		});
 		mnDodaj.add(mntmPrzedmiot);
 		
 		JMenuItem mntmNauczyciel = new JMenuItem("Nauczyciel");
+		mntmNauczyciel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane,"Nauczyciel");
+			}
+		});
 		mnDodaj.add(mntmNauczyciel);
 		
 		JMenuItem mntmUcze = new JMenuItem("Ucze\u0144");
@@ -83,10 +105,16 @@ public class AdminGUI extends JFrame {
 		mnUsu.add(mntmUcze_2);
 		
 		JMenuItem mntmKlasa_2 = new JMenuItem("Klasa");
-		mnUsu.add(mntmKlasa_2);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		mnUsu.add(mntmKlasa_2);		
+		
+		contentPane.add("Empty",new JPanel());
+		JPanel addSubject = new addSubject_GUI();
+		contentPane.add("Przedmiot",addSubject);
+		
+		JPanel addTeacher = new addTeacher_GUI();
+		contentPane.add("Nauczyciel",addTeacher);
+		
+		
+		
 	}
 }

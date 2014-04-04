@@ -5,6 +5,7 @@ package controller;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -74,6 +75,33 @@ public ManageTeacher()
 		         return teacher;
 		      
 	   }
+
+	   
+			   public Teacher getTeacherbyPIN(String Pin) throws Exception
+			   {
+				   Session session = HibernateUtil.getSessionFactory().openSession();
+				      Transaction tx = null;
+				      Teacher teacher = null;
+				      try{
+				         tx = session.beginTransaction();	
+				         
+				         String hql = "FROM Teacher T WHERE T.personalIdentityNumber = "+Pin;
+				         Query query = session.createQuery(hql);
+				         teacher = (Teacher) query.list().get(0);				         
+				         tx.commit(); 
+				         
+				      }catch (HibernateException e) {
+				         if (tx!=null) tx.rollback();
+				         e.printStackTrace(); 
+				         throw new NumberFormatException();
+				      }finally {
+				         session.close(); 
+				      }
+				         return teacher;
+				   
+			   }
+			   
+			   
 	   /* Method to GET all teachers from the DB */
 	   @SuppressWarnings("unchecked")
 	public List<Teacher> getAllTeachers()
@@ -82,9 +110,9 @@ public ManageTeacher()
 		      Transaction tx = null;
 		      List<Teacher> teachers = null;
 		      try{
-		         tx = session.beginTransaction();
-		         teachers  = (List<Teacher>) session.createQuery("from Teacher").list();				
-		         tx.commit();
+		         tx = session.beginTransaction();		      
+		         teachers  = (List<Teacher>) session.createQuery("select from Teacher where Teacher.name = ").list();				
+		         tx.commit(); 
 		         
 		      }catch (HibernateException e) {
 		         if (tx!=null) tx.rollback();
