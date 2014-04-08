@@ -35,7 +35,30 @@ public class Login_GUI {
 	
 	final JLabel pesel_blad_znak = new JLabel("B\u0142\u0119dny pesel lub/i has\u0142o");
 	
-	
+	class LoginStudent extends SwingWorker<Student, Void>
+	{
+
+		@Override
+		protected Student doInBackground() throws Exception {
+			try{
+				Student student = loginStudent();
+			return student;
+			}
+			catch(NumberFormatException ex)
+	    	{
+				throw new NumberFormatException();		
+			
+	    	}	
+		}
+		protected void done()
+		{
+			try{
+			Student_GUI student_gui = new Student_GUI(get());
+		} catch (InterruptedException | ExecutionException e) {					
+			pesel_blad_znak.setVisible(true);					
+		}
+		}
+	}
 	class LoginTeacher extends SwingWorker<Teacher,Void>
 	{
 		
@@ -139,6 +162,33 @@ boolean correct = false;
 		
 			
 	}
+	
+	public Student loginStudent() throws Exception
+	{	
+			
+		
+		Student student = null;			
+boolean correct = false;
+		
+		if(txt_pesel.getText().length() != 11)
+				throw new NumberFormatException();
+
+	    	ManageStudent MS = new ManageStudent();
+	    	student = MS.getStudentbyPIN(txt_pesel.getText());
+	    	char[] password = passwordField.getPassword();						    	
+	    	
+	    	if(isCorrect(student.getPassword().toCharArray(),password))
+		    			correct=true;//przypisanie nauczyciela
+	    	else
+	    				throw new NumberFormatException();	
+	    	
+	
+	    	
+
+			return student;	
+		
+			
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 290, 226);
@@ -193,6 +243,7 @@ boolean correct = false;
 		JButton btnZaloguj = new JButton("Zaloguj");
 		btnZaloguj.addActionListener(new ActionListener() {
 			private LoginTeacher login; 
+			private LoginStudent loginStudent;
 
 			public void actionPerformed(ActionEvent arg0) {		
 				
@@ -202,8 +253,9 @@ boolean correct = false;
 
 					switch(fruit) {
 					    case Uczen:
-					    	System.out.println("jestem w uczniu otwieram moje okno z ocenami");
-					    	Student_GUI student = new Student_GUI("nazwa studenta");
+					    	pesel_blad_znak.setVisible(false);				    	
+				    		loginStudent = new LoginStudent();
+				    		this.loginStudent.execute();					    	
 					        
 					        break;
 					    case Nauczyciel:  

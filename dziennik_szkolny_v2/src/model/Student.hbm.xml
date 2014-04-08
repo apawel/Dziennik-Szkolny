@@ -31,13 +31,13 @@
         </property>
         <set name="subjectMarks" table="SubjectMark" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Student_idStudent" not-null="true" />
+                <column name="Student_idStudent" not-null="false" />
             </key>
             <one-to-many class="model.SubjectMark" />
         </set>
         <set name="studentNotes" table="StudentNote" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Student_idStudent" not-null="true" />
+                <column name="Student_idStudent" not-null="false" />
             </key>
             <one-to-many class="model.StudentNote" />
         </set>

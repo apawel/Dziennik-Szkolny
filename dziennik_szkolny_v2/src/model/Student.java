@@ -2,7 +2,8 @@ package model;
 
 // Generated 2014-04-01 13:32:49 by Hibernate Tools 4.0.0
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +36,8 @@ public class Student implements java.io.Serializable {
 		this.password = password;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
+		this.subjectMarks=null;
+		this.studentNotes=null;
 	}
 
 	public Student(SchoolClass schoolClass, String firstName, String lastName,

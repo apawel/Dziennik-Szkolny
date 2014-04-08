@@ -14,23 +14,23 @@
         <property name="name" type="string">
             <column name="name" length="45" not-null="true" />
         </property>
-        <property name="yearStart" type="date">
+        <property name="yearStart" type="string">
             <column name="yearStart" length="0" not-null="true" />
         </property>
-        <property name="yearEnd" type="date">
+        <property name="yearEnd" type="string">
             <column name="yearEnd" length="0" not-null="true" />
         </property>
-        <set name="subjects" table="SchoolClass_has_Subject" inverse="false" lazy="true" fetch="select">
+        <set name="subjects" table="SchoolClass_has_Subject" inverse="false" lazy="false" fetch="select">
             <key>
-                <column name="SchoolClass_idSchoolClass" not-null="true" />
+                <column name="SchoolClass_idSchoolClass" not-null="false" />
             </key>
             <many-to-many entity-name="model.Subject">
-                <column name="Subject_idSubject" not-null="true" />
+                <column name="Subject_idSubject" not-null="false" />
             </many-to-many>
         </set>
-        <set name="students" table="Student" inverse="true" lazy="true" fetch="select">
+        <set name="students" table="Student" inverse="true" lazy="false" fetch="select">
             <key>
-                <column name="SchoolClass_idSchoolClass" not-null="true" />
+                <column name="SchoolClass_idSchoolClass" not-null="false" />
             </key>
             <one-to-many class="model.Student" />
         </set>

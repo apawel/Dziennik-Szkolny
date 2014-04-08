@@ -57,7 +57,7 @@ public ManageTeacher()
 	      }
 	   }
 	   /* Method to GET an teacher from the records */
-	   public Teacher getSubject(Integer teacherID){
+	   public Teacher getTeacher(Integer teacherID){
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
 		      Teacher teacher = null;
@@ -87,7 +87,8 @@ public ManageTeacher()
 				         
 				         String hql = "FROM Teacher T WHERE T.personalIdentityNumber = "+Pin;
 				         Query query = session.createQuery(hql);
-				         teacher = (Teacher) query.list().get(0);				         
+				         teacher = (Teacher) query.list().get(0);
+				         
 				         tx.commit(); 
 				         
 				      }catch (HibernateException e) {

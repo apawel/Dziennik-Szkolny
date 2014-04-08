@@ -55,7 +55,7 @@ public class Class_GUI extends JFrame {
 				//if(nauczyciel)
 				Student_Subject_GUI uczen_przedmiot = new Student_Subject_GUI("nazwa ucznia + nazwa przedmiotu");
 				//else if(wychowca)
-				Student_GUI student = new Student_GUI("nazwa Studenta");
+				//Student_GUI student = new Student_GUI();
 			}
 		});
 		btnWybierzUcznia.setBounds(252, 227, 155, 23);

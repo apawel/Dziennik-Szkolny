@@ -30,15 +30,15 @@ public class Teacher_GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		JLabel lblPrzedmiot = new JLabel("Przedmiot");
 		lblPrzedmiot.setBounds(10, 11, 72, 20);
 		contentPane.add(lblPrzedmiot);
-		/*Trzeba pobrac ten przedmiot gdzie id w bazie techara jesgo jest :D*/
-		JLabel lbl_prowadzonyprzeznauczycielaprzedmiot = new JLabel("s");
+		JLabel lbl_prowadzonyprzeznauczycielaprzedmiot = new JLabel(teacher.getSubject().getName());
 		lbl_prowadzonyprzeznauczycielaprzedmiot.setEnabled(false);
 		lbl_prowadzonyprzeznauczycielaprzedmiot.setBounds(80, 14, 222, 14);
 		contentPane.add(lbl_prowadzonyprzeznauczycielaprzedmiot);
-		
+		/*klasy ktore uczeszczaja na dany przedmiot*/
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(90, 49, 164, 20);
 		contentPane.add(comboBox);

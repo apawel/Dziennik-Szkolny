@@ -2,7 +2,7 @@ package model;
 
 // Generated 2014-04-01 13:32:49 by Hibernate Tools 4.0.0
 
-import java.util.Date;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,24 +14,26 @@ public class SchoolClass implements java.io.Serializable {
 	private Integer idSchoolClass;
 	private Teacher teacher;
 	private String name;
-	private Date yearStart;
-	private Date yearEnd;
-	private Set<Subject> subjects = new HashSet<Subject>(0);
-	private Set<Student> students = new HashSet<Student>(0);
+	private String yearStart;
+	private String yearEnd;
+	private Set<Subject> subjects = new HashSet<Subject>();
+	private Set<Student> students = new HashSet<Student>();
 
 	public SchoolClass() {
 	}
 
-	public SchoolClass(Teacher teacher, String name, Date yearStart,
-			Date yearEnd) {
+	public SchoolClass(Teacher teacher, String name, String yearStart,
+			String yearEnd) {
 		this.teacher = teacher;
 		this.name = name;
 		this.yearStart = yearStart;
 		this.yearEnd = yearEnd;
+		this.subjects=null;
+		this.students=null;
 	}
 
-	public SchoolClass(Teacher teacher, String name, Date yearStart,
-			Date yearEnd, Set<Subject> subjects, Set<Student> students) {
+	public SchoolClass(Teacher teacher, String name, String yearStart,
+			String yearEnd, Set<Subject> subjects, Set<Student> students) {
 		this.teacher = teacher;
 		this.name = name;
 		this.yearStart = yearStart;
@@ -64,19 +66,19 @@ public class SchoolClass implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Date getYearStart() {
+	public String getYearStart() {
 		return this.yearStart;
 	}
 
-	public void setYearStart(Date yearStart) {
+	public void setYearStart(String yearStart) {
 		this.yearStart = yearStart;
 	}
 
-	public Date getYearEnd() {
+	public String getYearEnd() {
 		return this.yearEnd;
 	}
 
-	public void setYearEnd(Date yearEnd) {
+	public void setYearEnd(String yearEnd) {
 		this.yearEnd = yearEnd;
 	}
 
