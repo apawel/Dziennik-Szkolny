@@ -2,6 +2,10 @@ package controller;
 
 
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import model.SchoolClass;
 import model.Subject;
 import model.Teacher;
@@ -38,6 +42,26 @@ public class ManageSchoolClass {
 	      return schoolClassID;
 	   }
 	
+	   /**GET all Schoolclass by subject   zwraca NULLa czemu?........*/
+	   public ArrayList<SchoolClass> getAllSchoolClassBySubjectID(Integer subjectID)
+	   {
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;
+		      ArrayList<SchoolClass> klasy = null;
+		      try{
+		         tx = session.beginTransaction();		      
+		         klasy  = ( ArrayList<SchoolClass>) session.createQuery("select from SchoolClass_has_Subject T WHERE T.Subject_idSubject = "+subjectID).list();				
+		         tx.commit(); 
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+		         return klasy;
+	   
+	   }
 	   public SchoolClass getSchoolClass(Integer schoolClassID){
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
@@ -61,11 +85,23 @@ public class ManageSchoolClass {
 	    * @param teacherID
 	    * @return
 	    */
-	/* public void addSubjectToClass(Subject subject)
-	 {
-		 this.getSubjects().add(MS.getSubject(1));
-		 
-	 }*/
+
+	   public void updateDB(SchoolClass schoolClass)
+	   {
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;		   
+		      try{
+		         tx = session.beginTransaction();
+		         session.update(schoolClass); 		
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+	   }
 	   public SchoolClass getSchoolClassbyTeacherID(Integer teacherID){
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
@@ -87,6 +123,8 @@ public class ManageSchoolClass {
 		         return schoolClass;
 		      
 	   }
+	 
+	   
 	   /* Method to DELETE an SchoolClass from the records */
 	   public void deleteSchoolClass(Integer schoolClassID){
 	      Session session = HibernateUtil.getSessionFactory().openSession();

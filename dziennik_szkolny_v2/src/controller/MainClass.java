@@ -14,7 +14,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 	
-		ManageSubject MS = new ManageSubject();
+		//ManageSubject MS = new ManageSubject();
 	//	MS.addSubject("Agent");
 	/*	MS.addSubject("Fizyka");
 		MS.addSubject("Chemia");
@@ -24,25 +24,33 @@ public class MainClass {
 		MS.addSubject("Biologia");
 		MS.addSubject("WF");
 		*/
-		//ManageTeacher MT = new ManageTeacher();
+		ManageTeacher MT = new ManageTeacher();
 		ManageSchoolClass MSC = new ManageSchoolClass();
-		
+		MSC.getSchoolClass(3).saveListOfStudentsToFile();
+	/*	
 		MSC.getSchoolClass(3).getSubjects().add(MS.getSubject(1));
+
 		MSC.getSchoolClass(3).getSubjects().add(MS.getSubject(2));
+
 		MSC.getSchoolClass(3).getSubjects().add(MS.getSubject(3));
+
 		MSC.getSchoolClass(3).getSubjects().add(MS.getSubject(4));
+
 		MSC.getSchoolClass(3).getSubjects().add(MS.getSubject(5));
+		
 		MSC.getSchoolClass(3).getSubjects().add(MS.getSubject(6));
+
 		MSC.getSchoolClass(3).getSubjects().add(MS.getSubject(10));
-		Iterator it = MSC.getSchoolClass(3).getSubjects().iterator();
-		while(it.hasNext()) {
-	         Subject element = (Subject)it.next();
-	         System.out.print(element.getName() + " ");
-	      }
+		MSC.updateDB(MSC.getSchoolClass(3));*/
+//		Iterator it = MSC.getSchoolClass(3).getSubjects().iterator();
+	//	while(it.hasNext()) {
+	//         Subject element = (Subject)it.next();
+	 //        System.out.print(element.getName() + " ");
+	//      }
 	//	@SuppressWarnings("deprecation")
-		//Date data = new Date(1999-1900,6,21);
-	/*	try {
-	//		MSC.addSchoolClass(MT.getTeacherbyPIN("92062410079"), "1C", "2013", "2014");
+	/*	Date data = new Date(1992-1900,4,22);
+		try {
+			MSC.addSchoolClass(MT.getTeacher(2), "1D", "2013", "2014");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,7 +58,7 @@ public class MainClass {
 
 		
 	ManageStudent MS = new ManageStudent();
-		MS.addStudent(MSC.getSchoolClass(3), "Ma³gorzata", "Gawor", "99988877766", "12134", data, "Golkowice 52");
+		MS.addStudent(MSC.getSchoolClass(3), "Pawe³", "B", "00011122233", "123", data, "Krakow, Czarnowiejska 5");
 		*/
 		
 		

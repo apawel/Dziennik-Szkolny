@@ -3,6 +3,8 @@ package controller;
 
 
 
+import java.util.List;
+
 import model.Student;
 import model.StudentNote;
 import model.Teacher;
@@ -37,8 +39,7 @@ public class ManageStudentNote {
 	      }
 	      return studentNoteID;
 	   }
-	
-	   /* Method to DELETE an StudentNote from the records */
+	 	   /* Method to DELETE an StudentNote from the records */
 	   public void deleteStudentNote(Integer studentNoteID){
 	      Session session = HibernateUtil.getSessionFactory().openSession();
 	      Transaction tx = null;

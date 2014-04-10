@@ -3,7 +3,10 @@ package model;
 // Generated 2014-04-01 13:32:49 by Hibernate Tools 4.0.0
 
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -21,7 +24,24 @@ public class SchoolClass implements java.io.Serializable {
 
 	public SchoolClass() {
 	}
+	  public void saveListOfStudentsToFile()
+	   { 
+		   try {
+			PrintWriter zapis = new PrintWriter(this.getName() + ".txt");
+			Iterator<Student> it = this.getStudents().iterator();
+			while(it.hasNext())
+			{
+				Student student = it.next();
+			zapis.println("Imiê i nazwisko: " + student.getFirstName() + " " + student.getLastName() + " Adres: " + student.getAddress() + " Data urodzenia: " + student.getDateOfBirth());
 
+			}
+			zapis.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	   }
 	public SchoolClass(Teacher teacher, String name, String yearStart,
 			String yearEnd) {
 		this.teacher = teacher;
