@@ -2,7 +2,6 @@ package controller;
 
 
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class ManageSchoolClass {
 	      return schoolClassID;
 	   }
 	
-	   /**GET all Schoolclass by subject   zwraca NULLa czemu?........*/
+	   /**GET all Schoolclass by subject   zwraca NULLa czemu?....... createcriteria restrictions eqaul.*/
 	   public ArrayList<SchoolClass> getAllSchoolClassBySubjectID(Integer subjectID)
 	   {
 		   Session session = HibernateUtil.getSessionFactory().openSession();

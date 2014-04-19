@@ -56,6 +56,7 @@ public class Teacher_GUI extends JFrame {
 		JButton btnDalej = new JButton("Dalej");
 		btnDalej.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*Nie pobiera tych klas, metoda zwraca NULL...*/
 				ArrayList<SchoolClass> klasy = new ArrayList<>();
 				ManageSchoolClass MSC = new ManageSchoolClass();
 				klasy=MSC.getAllSchoolClassBySubjectID(teacher.getSubject().getIdSubject());
