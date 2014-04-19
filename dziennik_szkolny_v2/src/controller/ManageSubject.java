@@ -1,18 +1,36 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Subject;
+
+
+
 
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageSubject {
+public class ManageSubject extends HibernateDaoSupport {
 	
 	public ManageSubject()
 	{}
+	/*save Subject*/
+	public void saveSubject(Subject subject)
+	{
+		getHibernateTemplate().save(subject);
+	}
+	/*get all Subjects*/
+	public ArrayList<Subject> getAllSubjects()
+	{
+		return  (ArrayList<Subject>) getHibernateTemplate().loadAll(Subject.class);
+		
+	}
 	/* Method to DELETE an subject from the records */
 	   public Integer addSubject(String name){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();

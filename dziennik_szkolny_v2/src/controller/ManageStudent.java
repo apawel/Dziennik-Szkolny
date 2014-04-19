@@ -11,12 +11,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageStudent {
+public class ManageStudent extends HibernateDaoSupport {
 	public ManageStudent()
 	{
+		
+	}
+	/*save Student*/
+	public void saveStudent(Student student)
+	{
+		getHibernateTemplate().save(student);
 		
 	}
 	/* Method to DELETE an student from the records */

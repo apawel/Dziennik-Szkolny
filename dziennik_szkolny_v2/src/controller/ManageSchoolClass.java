@@ -13,15 +13,27 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageSchoolClass {
+public class ManageSchoolClass extends HibernateDaoSupport{
 	public ManageSchoolClass()
 	{
 		
 	}
-	
+	/*get all schoolclass*/
+	public ArrayList<SchoolClass> getAllSchoolClass()
+	{
+		return  (ArrayList<SchoolClass>) getHibernateTemplate().loadAll(SchoolClass.class);
+		
+	}
+	/*save school class*/
+	public void saveSchoolClass(SchoolClass schoolClass)
+	{
+		getHibernateTemplate().save(schoolClass);
+	}
 	 /* Method to CREATE an SchoolClass in the database */
 	   public Integer addSchoolClass(Teacher teacher, String name, String yearStart,String yearEnd){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
@@ -41,6 +53,8 @@ public class ManageSchoolClass {
 	      return schoolClassID;
 	   }
 	
+	   
+	   
 	   /**GET all Schoolclass by subject   zwraca NULLa czemu?....... createcriteria restrictions eqaul.*/
 	   public ArrayList<SchoolClass> getAllSchoolClassBySubjectID(Integer subjectID)
 	   {
@@ -60,6 +74,16 @@ public class ManageSchoolClass {
 		      }
 		         return klasy;
 	   
+	   }
+	   
+	   /*to co wyzej ale inaczej*/
+	   public ArrayList<SchoolClass> getAllSchoolClassBySubject(Integer subjectID)
+	   {
+		   ArrayList list = (ArrayList) getSession().createCriteria(SchoolClass.class)
+	                .add(Restrictions.eq("Subject.idSubject", subjectID))//nie pamietam jak jest  w bazie sprawdzic konieczne.....
+	                .list();
+	 
+	        return list;   
 	   }
 	   public SchoolClass getSchoolClass(Integer schoolClassID){
 		   Session session = HibernateUtil.getSessionFactory().openSession();
@@ -84,6 +108,10 @@ public class ManageSchoolClass {
 	    * @param teacherID
 	    * @return
 	    */
+	   public void updateSchoolClass(SchoolClass schoolClass)
+	   {
+		   getHibernateTemplate().update(schoolClass);//konieczny test z takim updatem
+	   }
 
 	   public void updateDB(SchoolClass schoolClass)
 	   {

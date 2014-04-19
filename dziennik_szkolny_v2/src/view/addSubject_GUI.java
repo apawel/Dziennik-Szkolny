@@ -5,6 +5,11 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import controller.ManageSubject;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class addSubject_GUI extends JPanel {
 	private JTextField txtNazwaPrzedmiotu;
 
@@ -22,6 +27,12 @@ public class addSubject_GUI extends JPanel {
 		add(lblNazwaPrzedmiotu);
 		
 		JButton btnDodaj = new JButton("Dodaj");
+		btnDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ManageSubject MS = new ManageSubject();
+				MS.addSubject(txtNazwaPrzedmiotu.getText());//dodawanie przedmiotu
+			}
+		});
 		btnDodaj.setBounds(164, 83, 89, 23);
 		add(btnDodaj);
 

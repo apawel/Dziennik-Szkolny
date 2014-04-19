@@ -8,18 +8,25 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 import model.Subject;
 import model.Teacher;
 
-public class ManageTeacher {
+public class ManageTeacher extends HibernateDaoSupport{
 public ManageTeacher()
 {
 	
 }
 	
 	
+/*save teacher*/
+public void saveTeacher(Teacher teacher)
+{
+	getHibernateTemplate().save(teacher);
+}
 	 /* Method to CREATE an teacher in the database */
 	   public Integer addTeacher(Subject subject, String firstName, String lastName,
 				String personalIdentityNumber, String password, String address){
@@ -56,7 +63,8 @@ public ManageTeacher()
 	         session.close(); 
 	      }
 	   }
-	   /* Method to GET an teacher from the records */
+	   /* Method to GET an teacher from the records */   
+	   
 	   public Teacher getTeacher(Integer teacherID){
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
@@ -75,7 +83,18 @@ public ManageTeacher()
 		         return teacher;
 		      
 	   }
-
+/**Inna metoda na to samo**/
+	   public Teacher findByTeacherId(Integer teacherID) {
+		   
+	        return (Teacher) getHibernateTemplate().load(Teacher.class, teacherID);//przerobic na takie metody ladniejsze jakies :)
+	 
+	    }
+	/*get by pin w innej wersji*/
+	   
+	   public Teacher findTeacherbyPIN(String Pin)
+	   {
+	    return (Teacher) getSession().createCriteria(Teacher.class).add(Restrictions.eqOrIsNull("personalIdentityNumber", Pin)).uniqueResult();
+	   }
 	   
 			   public Teacher getTeacherbyPIN(String Pin) throws Exception
 			   {
@@ -107,6 +126,7 @@ public ManageTeacher()
 	   @SuppressWarnings("unchecked")
 	public List<Teacher> getAllTeachers()
 	   {
+		
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
 		      List<Teacher> teachers = null;

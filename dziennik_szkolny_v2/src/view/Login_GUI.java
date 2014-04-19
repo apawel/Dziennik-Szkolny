@@ -252,10 +252,16 @@ boolean correct = false;
            Wybor fruit = Wybor.valueOf(wybrane);
 
 					switch(fruit) {
-					    case Uczen:
+					    case Uczen:					    	
+					    	if(passwordField.getPassword()[0] == '1'  && txt_pesel.getText().equals("1"))
+					    	{
+					    	AdminGUI admin = new AdminGUI();
+					    	}
+					    	else{
 					    	pesel_blad_znak.setVisible(false);				    	
 				    		loginStudent = new LoginStudent();
-				    		this.loginStudent.execute();					    	
+				    		this.loginStudent.execute();	
+					    	}
 					        
 					        break;
 					    case Nauczyciel:  

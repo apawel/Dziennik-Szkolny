@@ -23,26 +23,16 @@ public class AdminGUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AdminGUI frame = new AdminGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public AdminGUI() {
 		super("Panel Admina");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 540, 300);
+		setVisible(true);
 		
 		layout = new CardLayout();
 		getContentPane().setLayout(layout);
@@ -72,6 +62,11 @@ public class AdminGUI extends JFrame {
 		mnDodaj.add(mntmNauczyciel);
 		
 		JMenuItem mntmUcze = new JMenuItem("Ucze\u0144");
+		mntmUcze.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane,"Uczeñ");
+			}
+		});
 		mnDodaj.add(mntmUcze);
 		
 		JMenuItem mntmKlasa = new JMenuItem("Klasa");
@@ -108,11 +103,15 @@ public class AdminGUI extends JFrame {
 		mnUsu.add(mntmKlasa_2);		
 		
 		contentPane.add("Empty",new JPanel());
+		
 		JPanel addSubject = new addSubject_GUI();
 		contentPane.add("Przedmiot",addSubject);
 		
 		JPanel addTeacher = new addTeacher_GUI();
-		contentPane.add("Nauczyciel",addTeacher);
+	    contentPane.add("Nauczyciel",addTeacher);
+		
+		JPanel addStudent = new addStudent_GUI();
+		contentPane.add("Ucze\u0144",addStudent);
 		
 		
 		

@@ -8,15 +8,22 @@ import model.Teacher;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.property.Getter;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageSubjectMark {
+public class ManageSubjectMark extends HibernateDaoSupport {
 	public ManageSubjectMark()
 	{
 		
 	}
 	
+	/*save subjectmark*/
+	public void saveSubjectMark(SubjectMark subjectMark)
+	{
+	getHibernateTemplate().save(subjectMark);	
+	}
 
 	 /* Method to CREATE an SubjectMark in the database */
 	   public Integer addSubjectMark(Student student, Subject subject, int value, int weight,

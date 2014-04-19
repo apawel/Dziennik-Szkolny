@@ -10,15 +10,20 @@ import model.Teacher;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageStudentNote {
+public class ManageStudentNote extends HibernateDaoSupport {
 	public ManageStudentNote()
 	{
 		
 	}
-
+/*save student note*/
+	public void saveStudentNote(StudentNote studentNote)
+	{
+		getHibernateTemplate().save(studentNote);
+	}
 	 /* Method to CREATE an StudentNote in the database */
 	   public Integer addStudentNote(Teacher teacher, Student student, String noteContents){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
