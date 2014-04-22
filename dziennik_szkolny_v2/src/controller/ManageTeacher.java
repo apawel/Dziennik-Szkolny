@@ -16,10 +16,7 @@ import model.Subject;
 import model.Teacher;
 
 public class ManageTeacher extends HibernateDaoSupport{
-public ManageTeacher()
-{
-	
-}
+
 	
 	
 /*save teacher*/

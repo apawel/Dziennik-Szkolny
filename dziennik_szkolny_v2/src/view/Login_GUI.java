@@ -92,6 +92,30 @@ public class Login_GUI {
         }
 		
 	}
+	class LoginClassMaster extends SwingWorker<SchoolClass, Void>
+	{
+
+		@Override
+		protected SchoolClass doInBackground() throws Exception {
+			try{
+				SchoolClass schoolClass = loginSchoolClass();
+			return schoolClass;
+			}
+			catch(NumberFormatException ex)
+	    	{
+				throw new NumberFormatException();		
+			
+	    	}	
+		}
+		protected void done()
+		{
+			try{
+			Class_Master_GUI schoolClass_gui = new Class_Master_GUI(get());
+		} catch (InterruptedException | ExecutionException e) {					
+			pesel_blad_znak.setVisible(true);					
+		}
+		}
+	}
 	
 	private enum Wybor {    Uczen, Nauczyciel, Wychowawca;
 	}
@@ -117,7 +141,9 @@ public class Login_GUI {
 	 * Create the application.
 	 */
 	public Login_GUI() {
+		
 		initialize();
+		
 	}
 
 	/**
@@ -162,6 +188,34 @@ boolean correct = false;
 		
 			
 	}
+	public SchoolClass loginSchoolClass() throws Exception
+	{	
+			
+		
+		//SchoolClass schoolCLass = null;	
+		Teacher teacher=null;
+boolean correct = false;
+		
+		if(txt_pesel.getText().length() != 11)
+				throw new NumberFormatException();
+		
+		ManageTeacher MT = new ManageTeacher();
+    	teacher = MT.getTeacherbyPIN(txt_pesel.getText());
+    	char[] password = passwordField.getPassword();						    	
+    	
+    	if(isCorrect(teacher.getPassword().toCharArray(),password))
+	    			correct=true;//przypisanie nauczyciela
+    	else
+    				throw new NumberFormatException();	
+	    	
+	
+	    	ManageSchoolClass MSC = new ManageSchoolClass();
+	    	SchoolClass schoolClass = MSC.getSchoolClassbyTeacherID(teacher.getIdTeacher());
+
+			return schoolClass;	
+		
+			
+	}
 	
 	public Student loginStudent() throws Exception
 	{	
@@ -191,6 +245,7 @@ boolean correct = false;
 	}
 	private void initialize() {
 		frame = new JFrame();
+		
 		frame.setBounds(100, 100, 290, 226);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -244,6 +299,7 @@ boolean correct = false;
 		btnZaloguj.addActionListener(new ActionListener() {
 			private LoginTeacher login; 
 			private LoginStudent loginStudent;
+			private LoginClassMaster loginClassMaster;
 
 			public void actionPerformed(ActionEvent arg0) {		
 				
@@ -270,8 +326,9 @@ boolean correct = false;
 					    		this.login.execute();
 					        break;
 					    case Wychowawca:
-					    	Class_GUI klasa = new Class_GUI("nazwa klasy tego wychowawcy");
-					    	System.out.println("jestem w wychowawcy. otwieram jego klase");
+					    	pesel_blad_znak.setVisible(false);	
+					    	loginClassMaster = new LoginClassMaster();
+					    	this.loginClassMaster.execute();					    	
 					    	break;
 					}
 					

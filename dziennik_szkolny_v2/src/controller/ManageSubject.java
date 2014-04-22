@@ -19,7 +19,9 @@ import utils.HibernateUtil;
 public class ManageSubject extends HibernateDaoSupport {
 	
 	public ManageSubject()
-	{}
+	{
+		
+	}
 	/*save Subject*/
 	public void saveSubject(Subject subject)
 	{

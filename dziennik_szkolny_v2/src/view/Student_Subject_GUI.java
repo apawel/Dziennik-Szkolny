@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JButton;
+
+import model.Student;
+import model.Student_Teacher;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -19,8 +23,8 @@ public class Student_Subject_GUI extends JFrame {
 	private JTextField txtImieINazwisko;
 	private JTable table;
 
-	public Student_Subject_GUI(String nazwa) {
-		super(nazwa);
+	public Student_Subject_GUI(Student_Teacher student_subject) {
+		super(student_subject.getStudent().getFirstName() + " " + student_subject.getStudent().getLastName());
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -35,7 +39,7 @@ public class Student_Subject_GUI extends JFrame {
 		
 		txtImieINazwisko = new JTextField();
 		txtImieINazwisko.setEditable(false);
-		txtImieINazwisko.setText("imie i nazwisko ucznia");
+		txtImieINazwisko.setText(student_subject.getStudent().getFirstName() + " " + student_subject.getStudent().getLastName());
 		txtImieINazwisko.setBounds(76, 8, 146, 20);
 		contentPane.add(txtImieINazwisko);
 		txtImieINazwisko.setColumns(10);

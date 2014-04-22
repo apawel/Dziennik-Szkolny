@@ -3,7 +3,11 @@ package controller;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 import model.SchoolClass;
 import model.Subject;
@@ -32,7 +36,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	/*save school class*/
 	public void saveSchoolClass(SchoolClass schoolClass)
 	{
-		getHibernateTemplate().save(schoolClass);
+		getHibernateTemplate().update(schoolClass);
 	}
 	 /* Method to CREATE an SchoolClass in the database */
 	   public Integer addSchoolClass(Teacher teacher, String name, String yearStart,String yearEnd){
@@ -56,6 +60,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	   
 	   
 	   /**GET all Schoolclass by subject   zwraca NULLa czemu?....... createcriteria restrictions eqaul.*/
+	   /*nie chce to dzialac*/
 	   public ArrayList<SchoolClass> getAllSchoolClassBySubjectID(Integer subjectID)
 	   {
 		   Session session = HibernateUtil.getSessionFactory().openSession();
@@ -63,7 +68,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 		      ArrayList<SchoolClass> klasy = null;
 		      try{
 		         tx = session.beginTransaction();		      
-		         klasy  = ( ArrayList<SchoolClass>) session.createQuery("select from SchoolClass_has_Subject T WHERE T.Subject_idSubject = "+subjectID).list();				
+		         klasy  = ( ArrayList<SchoolClass>) session.createQuery("FROM SchoolClass T WHERE T.subjects.idSubject = "+subjectID).list();				
 		         tx.commit(); 
 		         
 		      }catch (HibernateException e) {
@@ -76,12 +81,19 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	   
 	   }
 	   
+	   
 	   /*to co wyzej ale inaczej*/
 	   public ArrayList<SchoolClass> getAllSchoolClassBySubject(Integer subjectID)
 	   {
 		   ArrayList list = (ArrayList) getSession().createCriteria(SchoolClass.class)
 	                .add(Restrictions.eq("Subject.idSubject", subjectID))//nie pamietam jak jest  w bazie sprawdzic konieczne.....
 	                .list();
+		   Iterator it = (Iterator) list.iterator();
+			for(int i =0;i<list.size();i++)
+			{
+			
+				System.out.println("Klasa: " + ((SchoolClass) list.get(i)).getName());
+			}
 	 
 	        return list;   
 	   }
@@ -110,7 +122,8 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	    */
 	   public void updateSchoolClass(SchoolClass schoolClass)
 	   {
-		   getHibernateTemplate().update(schoolClass);//konieczny test z takim updatem
+			System.out.println("jestem klasa : " + schoolClass.getName() + " W update.");
+		   getHibernateTemplate().update("schoolclass", schoolClass);
 	   }
 
 	   public void updateDB(SchoolClass schoolClass)
@@ -134,7 +147,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 		      Transaction tx = null;
 		      SchoolClass schoolClass = null;
 		      try{
-		    	  String hql = "FROM SchoolClass T WHERE T.ClassMaster_idTeacher = "+teacherID;
+		    	  String hql = "FROM SchoolClass T WHERE T.teacher = "+teacherID;
 			         Query query = session.createQuery(hql);
 			         schoolClass = (SchoolClass) query.list().get(0);	         
 			       
@@ -150,7 +163,27 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 		         return schoolClass;
 		      
 	   }
-	 
+		public List<SchoolClass> getAllSchoolClasses()
+		   {
+			
+			   Session session = HibernateUtil.getSessionFactory().openSession();
+			      Transaction tx = null;
+			      List<SchoolClass> teachers = null;
+			      try{
+			         tx = session.beginTransaction();		      
+			         teachers  = (List<SchoolClass>) session.createQuery("FROM SchoolClass ").list();				
+			         tx.commit(); 
+			         
+			      }catch (HibernateException e) {
+			         if (tx!=null) tx.rollback();
+			         e.printStackTrace(); 
+			      }finally {
+			         session.close(); 
+			      }
+			  
+			         return teachers;
+			   
+		   }
 	   
 	   /* Method to DELETE an SchoolClass from the records */
 	   public void deleteSchoolClass(Integer schoolClassID){

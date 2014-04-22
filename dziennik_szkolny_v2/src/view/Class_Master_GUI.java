@@ -14,8 +14,6 @@ import javax.swing.JButton;
 
 import model.SchoolClass;
 import model.Student;
-import model.Student_Teacher;
-import model.Teacher_Class;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,7 +23,7 @@ import java.util.Set;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
-public class Class_GUI extends JFrame {
+public class Class_Master_GUI extends JFrame {
 
 	private JPanel contentPane;
 
@@ -37,8 +35,8 @@ public class Class_GUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Class_GUI(final Teacher_Class teacher_schoolClass) {
-		super(teacher_schoolClass.getSchoolClass().getName());
+	public Class_Master_GUI(SchoolClass schoolClass) {
+		super(schoolClass.getName());
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -54,7 +52,7 @@ public class Class_GUI extends JFrame {
 		
 		
 		final DefaultListModel model = new DefaultListModel();
-		final Set uczniowie = teacher_schoolClass.getSchoolClass().getStudents();
+		final Set uczniowie = schoolClass.getStudents();
 		java.util.Iterator it =  uczniowie.iterator();
 		final JList lista_uczniow = new JList(model);
 		lista_uczniow.setVisibleRowCount(20);
@@ -71,7 +69,7 @@ public class Class_GUI extends JFrame {
 		
 		
 		
-		JLabel lblNazwaklasy = new JLabel(teacher_schoolClass.getSchoolClass().getName());
+		JLabel lblNazwaklasy = new JLabel(schoolClass.getName());
 		lblNazwaklasy.setEnabled(false);
 		lblNazwaklasy.setBounds(81, 11, 69, 14);
 		contentPane.add(lblNazwaklasy);
@@ -79,10 +77,10 @@ public class Class_GUI extends JFrame {
 		JButton btnWybierzUcznia = new JButton("Wybierz ucznia");
 		btnWybierzUcznia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int wybrany = lista_uczniow.getSelectedIndex();
 				java.util.Iterator it =  uczniowie.iterator();
-				Student student=null;
-				
+				Student student=null;			
 				int i=0;
 				while(it.hasNext())
 				{
@@ -93,8 +91,7 @@ public class Class_GUI extends JFrame {
 						i++;
 						
 				}
-				Student_Subject_GUI uczen_przedmiot = new Student_Subject_GUI(new Student_Teacher(student, teacher_schoolClass.getTeacher()));
-				
+				Student_GUI student_gui = new Student_GUI(student);
 			}
 		});
 		btnWybierzUcznia.setBounds(252, 227, 155, 23);

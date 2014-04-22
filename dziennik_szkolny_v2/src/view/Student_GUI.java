@@ -28,7 +28,7 @@ public class Student_GUI extends JFrame {
 	 to widoczne tez dla wychowawcy po kliknieciu wybierz ucznia z class_gui
 	 */
 	public Student_GUI(Student nazwa) {
-		super(nazwa.getFirstName() + nazwa.getLastName());
+		super(nazwa.getFirstName() +" "+ nazwa.getLastName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 326, 244);
 		setVisible(true);
@@ -41,12 +41,12 @@ public class Student_GUI extends JFrame {
 		contentPane.add(panel, "name_801099329547601");
 		panel.setLayout(null);
 		
-		JButton btnWyloguj = new JButton("Wyloguj");
-		btnWyloguj.setBounds(10, 161, 71, 23);
+		JButton btnWyloguj = new JButton("Wr\u00F3\u0107");
+		btnWyloguj.setBounds(10, 161, 87, 23);
 		panel.add(btnWyloguj);
 		
 		JButton btnUwagi = new JButton("Uwagi");
-		btnUwagi.setBounds(229, 161, 61, 23);
+		btnUwagi.setBounds(212, 161, 78, 23);
 		btnUwagi.setAlignmentY(Component.TOP_ALIGNMENT);
 		panel.add(btnUwagi);
 		
@@ -55,7 +55,7 @@ public class Student_GUI extends JFrame {
 		panel.add(lista_ocen);
 		btnWyloguj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				dispose();
 			}
 		});
 	}

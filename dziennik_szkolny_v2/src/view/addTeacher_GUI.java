@@ -27,7 +27,7 @@ public class addTeacher_GUI extends JPanel {
 	
 	public addTeacher_GUI() {
 		setLayout(null);
-		final ManageSubject MS = null;// = new ManageSubject();
+		final ManageSubject MS = new ManageSubject();
 		
 		
 		
