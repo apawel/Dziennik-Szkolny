@@ -15,6 +15,7 @@ public class MainClass {
 	
 	public static void main(String[] args) {
 	
+		
 		ManageSubject MS = new ManageSubject();
 		/*MS.addSubject("Agent");
 		MS.addSubject("Fizyka");

@@ -24,8 +24,7 @@ import utils.HibernateUtil;
 
 public class ManageSchoolClass extends HibernateDaoSupport{
 	public ManageSchoolClass()
-	{
-		
+	{		
 	}
 	/*get all schoolclass*/
 	public ArrayList<SchoolClass> getAllSchoolClass()
