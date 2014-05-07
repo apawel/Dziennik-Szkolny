@@ -23,6 +23,9 @@ import java.util.Set;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
+import chat.Client_GUI_Teacher;
+import chat.Server_GUI;
+
 public class Class_Master_GUI extends JFrame {
 
 	private JPanel contentPane;
@@ -107,6 +110,13 @@ public class Class_Master_GUI extends JFrame {
 		contentPane.add(btnWr);
 		
 		JButton btnNewButton = new JButton("Wirtualne Zebranie");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Server_GUI server_gui= new Server_GUI();
+				server_gui.setVisible(true);
+				Client_GUI_Teacher CGT = new Client_GUI_Teacher();
+			}
+		});
 		btnNewButton.setBounds(153, 227, 146, 23);
 		contentPane.add(btnNewButton);
 		

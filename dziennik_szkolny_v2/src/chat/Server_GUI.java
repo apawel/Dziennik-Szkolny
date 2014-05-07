@@ -75,7 +75,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 		server = null;
 		
 		
-		setBounds(100, 100, 389, 303);
+		setBounds(700, 100, 389, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
