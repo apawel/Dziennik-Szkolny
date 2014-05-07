@@ -112,6 +112,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 		tfPort.setEditable(false);
 		// don't react to a <CR> after the username
 		tf.removeActionListener(this);
+	
 		connected = false;
 	}
 		
@@ -163,7 +164,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 			}
 
 			// try creating a new Client with GUI
-			client = new Client(server, port, username, this);
+			client = null;//new Client(server, port, username, this);
 			// test if we can start the Client
 			if(!client.start()) 
 				return;

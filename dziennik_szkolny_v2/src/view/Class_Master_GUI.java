@@ -39,7 +39,7 @@ public class Class_Master_GUI extends JFrame {
 		super(schoolClass.getName());
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 472, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,7 +94,7 @@ public class Class_Master_GUI extends JFrame {
 				Student_GUI student_gui = new Student_GUI(student);
 			}
 		});
-		btnWybierzUcznia.setBounds(252, 227, 155, 23);
+		btnWybierzUcznia.setBounds(302, 227, 130, 23);
 		contentPane.add(btnWybierzUcznia);
 		
 		JButton btnWr = new JButton("Wr\u00F3\u0107");
@@ -105,6 +105,10 @@ public class Class_Master_GUI extends JFrame {
 		});
 		btnWr.setBounds(20, 227, 130, 23);
 		contentPane.add(btnWr);
+		
+		JButton btnNewButton = new JButton("Wirtualne Zebranie");
+		btnNewButton.setBounds(153, 227, 146, 23);
+		contentPane.add(btnNewButton);
 		
 	
 	}

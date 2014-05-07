@@ -55,6 +55,19 @@ public class Student implements java.io.Serializable {
 		this.studentNotes = studentNotes;
 	}
 
+	public Student(Student student) {
+	
+		this.schoolClass = student.schoolClass;
+		this.firstName =  student.firstName;
+		this.lastName =  student.lastName;
+		this.personalIdentityNumber =  student.personalIdentityNumber;
+		this.password =  student.password;
+		this.dateOfBirth =  student.dateOfBirth;
+		this.address =  student.address;
+		this.subjectMarks= student.subjectMarks;
+		this.studentNotes= student.studentNotes;
+	}
+
 	public Integer getIdStudent() {
 		return this.idStudent;
 	}

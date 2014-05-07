@@ -1,45 +1,47 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2014-04-01 13:32:49 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="model.Student" table="Student" catalog="plysiu_apawel">
-        <id name="idStudent" type="java.lang.Integer">
-            <column name="idStudent" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="schoolClass" class="model.SchoolClass" fetch="select">
-            <column name="SchoolClass_idSchoolClass" not-null="true" />
-        </many-to-one>
-        <property name="firstName" type="string">
-            <column name="firstName" length="45" not-null="true" />
-        </property>
-        <property name="lastName" type="string">
-            <column name="lastName" length="45" not-null="true" />
-        </property>
-        <property name="personalIdentityNumber" type="string">
-            <column name="personalIdentityNumber" length="11" not-null="true" />
-        </property>
-        <property name="password" type="string">
-            <column name="password" length="45" not-null="true" />
-        </property>
-        <property name="dateOfBirth" type="date">
-            <column name="dateOfBirth" length="10" not-null="true" />
-        </property>
-        <property name="address" type="string">
-            <column name="address" length="45" not-null="true" />
-        </property>
-        <set name="subjectMarks" table="SubjectMark" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="Student_idStudent" not-null="false" />
-            </key>
-            <one-to-many class="model.SubjectMark" />
-        </set>
-        <set name="studentNotes" table="StudentNote" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="Student_idStudent" not-null="false" />
-            </key>
-            <one-to-many class="model.StudentNote" />
-        </set>
-    </class>
+ <class catalog="plysiu_apawel" name="model.Student" table="Student">
+  <id name="idStudent" type="java.lang.Integer">
+   <column name="idStudent"/>
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="model.SchoolClass" fetch="select" name="schoolClass">
+   <column name="SchoolClass_idSchoolClass" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="firstName" type="string">
+   <column length="45" name="firstName" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="lastName" type="string">
+   <column length="45" name="lastName" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="personalIdentityNumber" type="string">
+   <column length="11" name="personalIdentityNumber" not-null="true" unique="true"/>
+  </property>
+  <property generated="never" lazy="false" name="password" type="string">
+   <column length="45" name="password" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="dateOfBirth" type="date">
+   <column length="10" name="dateOfBirth" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="address" type="string">
+   <column length="45" name="address" not-null="true"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="subjectMarks"
+   sort="unsorted" table="SubjectMark">
+   <key>
+    <column name="Student_idStudent" not-null="false"/>
+   </key>
+   <one-to-many class="model.SubjectMark"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="studentNotes"
+   sort="unsorted" table="StudentNote">
+   <key>
+    <column name="Student_idStudent" not-null="false"/>
+   </key>
+   <one-to-many class="model.StudentNote"/>
+  </set>
+ </class>
 </hibernate-mapping>

@@ -28,7 +28,7 @@ public class Teacher_GUI extends JFrame {
 
 	private JPanel contentPane;
 
-	public Teacher_GUI(final Teacher teacher) {
+	public Teacher_GUI(final Teacher teacher) {	
 		super(teacher.getFirstName() + " " +teacher.getLastName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 324, 150);
@@ -37,6 +37,7 @@ public class Teacher_GUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		
 		
 		JLabel lblPrzedmiot = new JLabel("Przedmiot");

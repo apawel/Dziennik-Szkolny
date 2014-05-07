@@ -35,7 +35,7 @@ public class Login_GUI {
 	
 	final JLabel pesel_blad_znak = new JLabel("B\u0142\u0119dny pesel lub/i has\u0142o");
 	
-	class LoginStudent extends SwingWorker<Student, Void>
+	private class LoginStudent extends SwingWorker<Student, Void>
 	{
 
 		@Override
@@ -244,9 +244,11 @@ boolean correct = false;
 			
 	}
 	private void initialize() {
-		frame = new JFrame();
 		
-		frame.setBounds(100, 100, 290, 226);
+		frame = new JFrame();
+		frame.setTitle("Wirtualny dziennik Szkolny");
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 350, 226);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
