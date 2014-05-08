@@ -8,7 +8,7 @@
             <column name="idSchoolClass" />
             <generator class="identity" />
         </id>
-        <many-to-one name="teacher" class="model.Teacher" fetch="select">
+        <many-to-one name="teacher" class="model.Teacher" lazy="false" fetch="select">
             <column name="ClassMaster_idTeacher" not-null="true" />
         </many-to-one>
         <property name="name" type="string">

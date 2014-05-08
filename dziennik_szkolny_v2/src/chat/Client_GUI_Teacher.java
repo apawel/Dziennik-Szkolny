@@ -25,6 +25,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+import model.Teacher;
+
 public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 
 	/**
@@ -47,15 +49,14 @@ public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 	private JPanel contentPane;
 	private JTextField txt_adres_serwara;
 	private JTextField txt_port;
-	private JTextField txt_pesel;
-	private JPasswordField passwordField;
 	private JTextField txt_messages;
-
+private Teacher wychowawca;
 	public static void main(String[] args) {
 		new Client_GUI();
 	}
-	public Client_GUI_Teacher() {
+	public Client_GUI_Teacher(Teacher teacher) {
 		super("Okno wychowawcy - wirtualne zebranie");
+		wychowawca=teacher;
 		defaultPort = 3050;
 		defaultHost = "localhost";
 		setBounds(100, 100, 450, 300);
@@ -94,22 +95,6 @@ public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 		txt_port = new JTextField();
 		gora_.add(txt_port);
 		txt_port.setColumns(10);
-		
-		JLabel lblPeselDziecka = new JLabel("Pesel dziecka: ");
-		gora_.add(lblPeselDziecka);
-		
-		txt_pesel = new JTextField();
-		gora_.add(txt_pesel);
-		txt_pesel.setColumns(10);
-		
-		JLabel lblHaso = new JLabel("Has\u0142o: ");
-		gora_.add(lblHaso);
-		
-		passwordField = new JPasswordField();
-		passwordField.setColumns(10);
-		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
-		passwordField.setEchoChar('*');
-		gora_.add(passwordField);
 		
 		btnPocz = new JButton("Po\u0142\u0105cz");
 		gora_.add(btnPocz);
@@ -172,7 +157,7 @@ public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 		// ok it is coming from the JTextField
 		if(connected) {
 			// just have to send the message
-			client.sendMessage(new ChatMessage(ChatMessage.Action.MESSAGE, txt_messages.getText()));				
+			client.sendMessage(new ChatMessage(ChatMessage.Action.MESSAGE,"--Wychowawca-- " + txt_messages.getText()));				
 			txt_messages.setText("");
 			return;
 		}
@@ -180,10 +165,9 @@ public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 
 		if(o == btnPocz) {
 			// ok it is a connection request
-			String pesel = txt_pesel.getText().trim();
+			
 			// empty username ignore it
-			if(pesel.length() == 0)
-				return;
+		
 			// empty serverAddress ignore it
 			String server = txt_adres_serwara.getText().trim();
 			if(server.length() == 0)
@@ -205,7 +189,7 @@ public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 			 * tu wywolanie metody do logowania z login_gui login jako uczen i pobranie imienia i nazwiska ucznia
 			 * pobrac wczesniejsze dane, przekazac tutaj TEACHER:) i z niego imie i nazwisko:)
 			 */
-			client = null;//new Client(server, port, username, this);
+			client = new Client(server, port, wychowawca.getFirstName() + " " + wychowawca.getLastName(), this);
 			// test if we can start the Client
 			if(!client.start()) 
 				return;

@@ -29,14 +29,14 @@
   <property generated="never" lazy="false" name="address" type="string">
    <column length="45" name="address" not-null="true"/>
   </property>
-  <set fetch="select" inverse="true" lazy="true" name="subjectMarks"
+  <set fetch="select" inverse="true" lazy="false" name="subjectMarks"
    sort="unsorted" table="SubjectMark">
    <key>
     <column name="Student_idStudent" not-null="false"/>
    </key>
    <one-to-many class="model.SubjectMark"/>
   </set>
-  <set fetch="select" inverse="true" lazy="true" name="studentNotes"
+  <set fetch="select" inverse="true" lazy="false" name="studentNotes"
    sort="unsorted" table="StudentNote">
    <key>
     <column name="Student_idStudent" not-null="false"/>

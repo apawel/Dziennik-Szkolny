@@ -38,7 +38,7 @@ public class Class_Master_GUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Class_Master_GUI(SchoolClass schoolClass) {
+	public Class_Master_GUI(final SchoolClass schoolClass) {
 		super(schoolClass.getName());
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,7 +114,7 @@ public class Class_Master_GUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Server_GUI server_gui= new Server_GUI();
 				server_gui.setVisible(true);
-				Client_GUI_Teacher CGT = new Client_GUI_Teacher();
+				Client_GUI_Teacher CGT = new Client_GUI_Teacher(schoolClass.getTeacher());
 			}
 		});
 		btnNewButton.setBounds(153, 227, 146, 23);

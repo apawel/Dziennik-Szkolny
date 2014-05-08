@@ -251,6 +251,7 @@ boolean correct = false;
 		// if it is the Logout button
 		if(o == btnWyloguj) {
 			client.sendMessage(new ChatMessage(ChatMessage.Action.LOGOUT, ""));
+			
 			return;
 		}
 		// if it the who is in button
