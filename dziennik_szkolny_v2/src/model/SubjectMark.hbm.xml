@@ -1,28 +1,29 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2014-04-01 13:32:49 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="model.SubjectMark" table="SubjectMark" catalog="plysiu_apawel">
-        <id name="idSubjectMark" type="java.lang.Integer">
-            <column name="idSubjectMark" />
-            <generator class="identity" />
-        </id>
-        <timestamp name="timeStamp" column="timeStamp" />
-        <many-to-one name="student" class="model.Student" fetch="select">
-            <column name="Student_idStudent" not-null="true" />
-        </many-to-one>
-        <many-to-one name="subject" class="model.Subject" fetch="select">
-            <column name="Subject_idSubject" not-null="true" />
-        </many-to-one>
-        <property name="value" type="int">
-            <column name="value" not-null="true" />
-        </property>
-        <property name="weight" type="int">
-            <column name="weight" not-null="true" />
-        </property>
-        <property name="description" type="string">
-            <column name="description" length="45" />
-        </property>
-    </class>
+ <class catalog="plysiu_apawel" name="model.SubjectMark" table="SubjectMark">
+  <id name="idSubjectMark" type="java.lang.Integer">
+   <column name="idSubjectMark"/>
+   <generator class="identity"/>
+  </id>
+  <timestamp column="timeStamp" generated="never" name="timeStamp"
+   source="vm" unsaved-value="null"/>
+  <many-to-one class="model.Student" fetch="select" name="student">
+   <column name="Student_idStudent" not-null="true"/>
+  </many-to-one>
+  <many-to-one class="model.Subject" fetch="select" name="subject">
+   <column name="Subject_idSubject" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="value" type="double">
+   <column name="value" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="weight" type="int">
+   <column name="weight" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="description" type="string">
+   <column length="45" name="description"/>
+  </property>
+ </class>
 </hibernate-mapping>

@@ -60,13 +60,16 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	   
 	   /**GET all Schoolclass by subject   zwraca NULLa czemu?....... createcriteria restrictions eqaul.*/
 	   /*nie chce to dzialac*/
-	   public ArrayList<SchoolClass> getAllSchoolClassBySubjectID(Integer subjectID)
+	   @SuppressWarnings("unchecked")
+	public ArrayList<SchoolClass> getAllSchoolClassBySubjectID(Integer subjectID)
 	   {
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
 		      ArrayList<SchoolClass> klasy = null;
 		      try{
-		         tx = session.beginTransaction();		      
+		         tx = session.beginTransaction();         
+		         
+		         
 		         klasy  = ( ArrayList<SchoolClass>) session.createQuery("FROM SchoolClass T WHERE T.subjects.idSubject = "+subjectID).list();				
 		         tx.commit(); 
 		         
@@ -162,15 +165,16 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 		         return schoolClass;
 		      
 	   }
+		@SuppressWarnings("unchecked")
 		public List<SchoolClass> getAllSchoolClasses()
 		   {
 			
 			   Session session = HibernateUtil.getSessionFactory().openSession();
 			      Transaction tx = null;
-			      List<SchoolClass> teachers = null;
+			      List<SchoolClass> schoolclass = null;
 			      try{
 			         tx = session.beginTransaction();		      
-			         teachers  = (List<SchoolClass>) session.createQuery("FROM SchoolClass ").list();				
+			         schoolclass  = (List<SchoolClass>) session.createQuery("FROM SchoolClass").list();				
 			         tx.commit(); 
 			         
 			      }catch (HibernateException e) {
@@ -180,7 +184,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 			         session.close(); 
 			      }
 			  
-			         return teachers;
+			         return schoolclass;
 			   
 		   }
 	   

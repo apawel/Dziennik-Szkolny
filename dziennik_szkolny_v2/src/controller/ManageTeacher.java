@@ -80,12 +80,8 @@ public void saveTeacher(Teacher teacher)
 		         return teacher;
 		      
 	   }
-/**Inna metoda na to samo**/
-	   public Teacher findByTeacherId(Integer teacherID) {
-		   
-	        return (Teacher) getHibernateTemplate().load(Teacher.class, teacherID);//przerobic na takie metody ladniejsze jakies :)
-	 
-	    }
+
+	    
 	/*get by pin w innej wersji*/
 	   
 	   public Teacher findTeacherbyPIN(String Pin)

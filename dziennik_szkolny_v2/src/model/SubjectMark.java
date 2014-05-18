@@ -13,21 +13,21 @@ public class SubjectMark implements java.io.Serializable {
 	private Date timeStamp;
 	private Student student;
 	private Subject subject;
-	private int value;
+	private double value;
 	private int weight;
 	private String description;
 
 	public SubjectMark() {
 	}
 
-	public SubjectMark(Student student, Subject subject, int value, int weight) {
+	public SubjectMark(Student student, Subject subject, double value, int weight) {
 		this.student = student;
 		this.subject = subject;
 		this.value = value;
 		this.weight = weight;
 	}
 
-	public SubjectMark(Student student, Subject subject, int value, int weight,
+	public SubjectMark(Student student, Subject subject, double value, int weight,
 			String description) {
 		this.student = student;
 		this.subject = subject;
@@ -68,11 +68,11 @@ public class SubjectMark implements java.io.Serializable {
 		this.subject = subject;
 	}
 
-	public int getValue() {
+	public double getValue() {
 		return this.value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 

@@ -6,6 +6,7 @@ import java.sql.Date;
 
 import model.SchoolClass;
 import model.Student;
+import model.Teacher;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -26,6 +27,24 @@ public class ManageStudent extends HibernateDaoSupport {
 		getHibernateTemplate().save(student);
 		
 	}
+	  public Student getStudentbyId(Integer studentID){
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;
+		      Student student = null;
+		      try{
+		         tx = session.beginTransaction();
+		         student =  (Student)session.get(Student.class, studentID); 		
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+		         return student;
+		      
+	   }
 	/* Method to DELETE an student from the records */
 	  public Integer addStudent(SchoolClass schoolClass, String firstName, String lastName,
 				String personalIdentityNumber, String password, Date dateOfBirth,

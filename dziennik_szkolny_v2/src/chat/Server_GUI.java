@@ -120,7 +120,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 	}
 	
 	public void windowClosing(WindowEvent e) {
-		// if my Server exist
+		// gdy server istnieje
 		if(server != null) {
 			try {
 				server.stop();			// ask the server to close the conection
@@ -129,7 +129,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 			}
 			server = null;
 		}
-		// dispose the frame
+		
 		dispose();
 		
 	}

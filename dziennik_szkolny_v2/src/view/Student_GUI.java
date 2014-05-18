@@ -6,31 +6,47 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JList;
 
 import model.Student;
+import model.StudentNote;
+import model.SubjectMark;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
+
 import java.awt.Component;
+
+import javax.swing.JSplitPane;
+
+import java.awt.FlowLayout;
+import java.util.Date;
+import java.util.Iterator;
+
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class Student_GUI extends JFrame {
 
 	private JPanel contentPane;
+	private JTable oceny;
+	private JTable uwagi;
 	
 
 	/**
 	 to widoczne tez dla wychowawcy po kliknieciu wybierz ucznia z class_gui
 	 */
-	public Student_GUI(Student nazwa) {
-		super(nazwa.getFirstName() +" "+ nazwa.getLastName());
+	public Student_GUI(Student student) {
+		super(student.getFirstName() +" "+ student.getLastName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 326, 244);
+		setBounds(100, 100, 618, 264);
 		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -39,20 +55,119 @@ public class Student_GUI extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "name_801099329547601");
-		panel.setLayout(null);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		panel.add(splitPane);
+		
+		JPanel panel_1 = new JPanel();
+		splitPane.setLeftComponent(panel_1);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnWyloguj = new JButton("Wr\u00F3\u0107");
-		btnWyloguj.setBounds(10, 161, 87, 23);
-		panel.add(btnWyloguj);
+		panel_1.add(btnWyloguj);
 		
-		JButton btnUwagi = new JButton("Uwagi");
-		btnUwagi.setBounds(212, 161, 78, 23);
-		btnUwagi.setAlignmentY(Component.TOP_ALIGNMENT);
-		panel.add(btnUwagi);
+		JPanel panel_2 = new JPanel();
+		splitPane.setRightComponent(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		JList lista_ocen = new JList();
-		lista_ocen.setBounds(26, 11, 232, 142);
-		panel.add(lista_ocen);
+		JSplitPane splitPane_1 = new JSplitPane();
+		splitPane_1.setResizeWeight(0.5);
+		splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		panel_2.add(splitPane_1);
+		
+		JPanel panel_3 = new JPanel();
+		splitPane_1.setLeftComponent(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		
+		
+		
+		
+		
+		Iterator it = student.getSubjectMarks().iterator();
+		
+		Object[][] obiekty;
+		Integer i = 0;
+
+		obiekty = new Object[student.getSubjectMarks().size()][5];
+		while (it.hasNext()) {
+			SubjectMark temp = (SubjectMark) it.next();
+			obiekty[i][0] = temp.getValue();
+			obiekty[i][1] = temp.getWeight();
+			Date data = temp.getTimeStamp();
+			obiekty[i][2] = data.getMonth() + "-" + data.getDay() + " " + data.getHours()+":"+data.getMinutes();
+			obiekty[i][3] = temp.getSubject().getName();
+			obiekty[i][4] = temp.getDescription();
+			i++;
+		}
+		if (obiekty.length == 0) {
+			obiekty = new Object[0][5];
+		}
+		
+		
+		
+		oceny = new JTable();
+		oceny.setFillsViewportHeight(true);
+		
+		oceny.setModel(new DefaultTableModel(obiekty, new String[] {
+				"Ocena", "Waga", "Kiedy","Przedmiot", "Opis" }) {
+			boolean[] columnEditables = new boolean[] { false, false, false,
+					false, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+
+		
+		//panel_3.add(oceny, BorderLayout.CENTER);
+		
+		JScrollPane oceny_scroll = new JScrollPane();
+		panel_3.add(oceny_scroll, BorderLayout.NORTH);
+		
+		JPanel panel_4 = new JPanel();
+		splitPane_1.setRightComponent(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		///////////////////////////
+		
+		
+		
+		i = 0;
+		it = student.getStudentNotes().iterator();
+		obiekty = new Object[student.getStudentNotes().size()][3];
+		while (it.hasNext()) {
+			StudentNote temp = (StudentNote) it.next();
+			obiekty[i][0] = i+1+".";
+			obiekty[i][1] = temp.getTeacher().getLastName() + " " + temp.getTeacher().getFirstName();
+			obiekty[i][2] = temp.getNoteContents();
+	
+			i++;
+		}
+		if (obiekty.length == 0) {
+			obiekty = new Object[0][3];
+		}
+		uwagi = new JTable();
+		uwagi.setFillsViewportHeight(true);
+		uwagi.setModel(new DefaultTableModel(
+			obiekty,
+			new String[] {
+				"LP", "Nauczyciel", "Tre\u015B\u0107"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		//panel_4.add(uwagi, BorderLayout.CENTER);
+		
+		JScrollPane uwagi_scroll = new JScrollPane();
+		panel_4.add(uwagi_scroll, BorderLayout.NORTH);
+		oceny_scroll.setViewportView(oceny);
+		uwagi_scroll.setViewportView(uwagi);
 		btnWyloguj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();

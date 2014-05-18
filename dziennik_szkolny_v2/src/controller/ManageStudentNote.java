@@ -3,8 +3,11 @@ package controller;
 
 
 
+import java.util.ArrayList;
+
 import model.Student;
 import model.StudentNote;
+import model.SubjectMark;
 import model.Teacher;
 
 import org.hibernate.HibernateException;
@@ -42,6 +45,26 @@ public class ManageStudentNote extends HibernateDaoSupport {
 	      }
 	      return studentNoteID;
 	   }
+		@SuppressWarnings("unchecked")
+		public ArrayList<StudentNote> getAllStudentNote()
+		   {
+			   Session session = HibernateUtil.getSessionFactory().openSession();
+			      Transaction tx = null;
+			      ArrayList<StudentNote> studentNote = null;
+			      try{
+			         tx = session.beginTransaction();		      
+			         studentNote  = (ArrayList<StudentNote>)session.createQuery("FROM StudentNote").list();				
+			         tx.commit(); 
+			         
+			      }catch (HibernateException e) {
+			         if (tx!=null) tx.rollback();
+			         e.printStackTrace(); 
+			      }finally {
+			         session.close(); 
+			      }
+			         return studentNote;
+			   
+		   }
 	 	   /* Method to DELETE an StudentNote from the records */
 	   public void deleteStudentNote(Integer studentNoteID){
 	      Session session = HibernateUtil.getSessionFactory().openSession();

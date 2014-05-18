@@ -30,7 +30,7 @@
    <column length="45" name="address" not-null="true"/>
   </property>
   <set fetch="select" inverse="true" lazy="false" name="subjectMarks"
-   sort="unsorted" table="SubjectMark">
+   order-by="Subject_idSubject" table="SubjectMark">
    <key>
     <column name="Student_idStudent" not-null="false"/>
    </key>

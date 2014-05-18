@@ -4,21 +4,19 @@ import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/*
- * The server that can be run both as a console application or a GUI
- */
+
 public class Server {
-	// a unique ID for each connection
+	
 	private static int uniqueId;
-	// an ArrayList to keep the list of the Client
+	
 	private ArrayList<ClientThread> al;
-	// if I am in a GUI
+	
 	private Server_GUI sg;	
-	// to display time
+	
 	private SimpleDateFormat sdf;
-	// the port number to listen for connection
+	
 	private int port;
-	// the boolean that will be turned of to stop the server
+	
 	private boolean keepGoing;
 	
 
@@ -27,35 +25,35 @@ public class Server {
 	public Server(int port,Server_GUI sg) {
 		this.sg=sg;
 		this.port = port;
-		// to display hh:mm:ss
+		
 		sdf = new SimpleDateFormat("HH:mm:ss");
-		// ArrayList for the Client list
+		
 		al = new ArrayList<ClientThread>();
 	}
 	
 	public void start() {
 		keepGoing = true;
-		/* create socket server and wait for connection requests */
+		
 		try 
 		{
-			// the socket used by the server
+			
 			ServerSocket serverSocket = new ServerSocket(port);
 
-			// infinite loop to wait for connections
+			
 			while(keepGoing) 
 			{
-				// format message saying we are waiting
+				
 				display("Oczekiwanie na polaczenie rodziców na porcie " + port + ".");
 				
 				Socket socket = serverSocket.accept();  	// accept connection
 				// if I was asked to stop
 				if(!keepGoing)//przestan czekac
 					break;
-				ClientThread t = new ClientThread(socket);  // make a thread of it
-				al.add(t);									// save it in the ArrayList
+				ClientThread t = new ClientThread(socket);  
+				al.add(t);									
 				t.start();
 			}
-			// I was asked to stop
+			
 			try {
 				serverSocket.close();
 				for(int i = 0; i < al.size(); ++i) {
@@ -74,7 +72,7 @@ public class Server {
 				display("Exception closing the server and clients: " + e);
 			}
 		}
-		// something went bad
+	
 		catch (IOException e) {
             String msg = sdf.format(new Date()) + " Exception on new ServerSocket: " + e + "\n";
 			display(msg);

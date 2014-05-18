@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 
 
+
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import javax.swing.JButton;
 import model.SchoolClass;
 import controller.ManageSchoolClass;
 import controller.ManageStudent;
+import controller.ManageSubject;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -46,7 +48,7 @@ public class addStudent_GUI extends JPanel {
 	 */
 	public addStudent_GUI() {
 		setLayout(null);
-		final ManageSchoolClass MSC = null;// = new ManageSubject();
+		final ManageSchoolClass MSC = new ManageSchoolClass();
 		JLabel lblImi = new JLabel("Imi\u0119:");
 		lblImi.setBounds(10, 11, 46, 14);
 		add(lblImi);
@@ -121,7 +123,7 @@ public class addStudent_GUI extends JPanel {
 		lblKlasa.setBounds(10, 154, 100, 14);
 		add(lblKlasa);
 		
-		final ArrayList<SchoolClass> klasy =  MSC.getAllSchoolClass();
+		final ArrayList<SchoolClass> klasy =  (ArrayList<SchoolClass>) MSC.getAllSchoolClasses();
 				
 		
 		final JComboBox comboBox = new JComboBox();
