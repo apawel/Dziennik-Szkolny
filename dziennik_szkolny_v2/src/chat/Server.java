@@ -45,9 +45,9 @@ public class Server {
 				
 				display("Oczekiwanie na polaczenie rodziców na porcie " + port + ".");
 				
-				Socket socket = serverSocket.accept();  	// accept connection
-				// if I was asked to stop
-				if(!keepGoing)//przestan czekac
+				Socket socket = serverSocket.accept();  	
+			
+				if(!keepGoing)
 					break;
 				ClientThread t = new ClientThread(socket);  
 				al.add(t);									
@@ -149,7 +149,7 @@ public class Server {
 				output = new ObjectOutputStream(socket.getOutputStream());
 				input  = new ObjectInputStream(socket.getInputStream());
 				// read the username
-				username = (String) input.readObject();//tu moze zminie chociaz nie wiem   IMIE I NAZWISKO
+				username = (String) input.readObject();
 				display("Dolaczyl : " +username);
 			}
 			catch (IOException e) {
@@ -164,10 +164,10 @@ public class Server {
 
 		// what will run forever
 		public void run() {
-			// to loop until LOGOUT
+			
 			boolean keepGoing = true;
 			while(keepGoing) {
-				// read a String (which is an object)
+				
 				try {
 					cm = (ChatMessage) input.readObject();
 				}
@@ -178,10 +178,9 @@ public class Server {
 				catch(ClassNotFoundException e2) {
 					break;
 				}
-				// the messaage part of the ChatMessage
+				
 				String message = cm.getMessage();
 
-				// Switch on the type of message receive
 				switch(cm.getType()) {
 				//tutaj mozna dodac wiecej akcji  np whipser dla wychowawcy do poszczegiolny rodzicow
 
@@ -206,13 +205,12 @@ public class Server {
 					break;
 				}
 			}
-			// remove myself from the arrayList containing the list of the
-			// connected Clients
+			
 			remove(id);
 			close();
 		}
 		
-		// try to close everything
+		
 		private void close() {
 			// try to close the connection
 			try {
@@ -234,16 +232,16 @@ public class Server {
 
 		
 		private boolean writeMsg(String msg) {
-			// if Client is still connected send the message to it
+		
 			if(!socket.isConnected()) {
 				close();
 				return false;
 			}
-			// write the message to the stream
+		
 			try {
 				output.writeObject(msg);
 			}
-			// if an error occurs, do not abort just inform the user
+			
 			catch(IOException e) {
 				display("Error sending message to " + username);
 				display(e.toString());

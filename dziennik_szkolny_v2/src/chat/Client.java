@@ -76,19 +76,15 @@ public class Client  {
 		return true;
 	}
 
-	/*
-	 * To send a message to the console or the GUI
-	 */
+
 	private void display(String msg) {		
 		if(cgt==null)
-			cg.append(msg + "\n");		// append to the ClientGUI JTextArea (or whatever)
+			cg.append(msg + "\n");		
 		else if(cg==null)
 			cgt.append(msg + "\n");
 	}
 	
-	/*
-	 * To send a message to the server
-	 */
+	
 	void sendMessage(ChatMessage msg) {
 		try {
 			output.writeObject(msg);
@@ -104,19 +100,19 @@ public class Client  {
 			if(input != null) 
 				input.close();
 		}
-		catch(Exception e) {} // not much else I can do
+		catch(Exception e) {} 
 		try {
 			if(output != null) 
 				output.close();
 		}
-		catch(Exception e) {} // not much else I can do
+		catch(Exception e) {} 
         try{
 			if(socket != null)
 				socket.close();
 		}
-		catch(Exception e) {} // not much else I can do
+		catch(Exception e) {} 
 		
-		// inform the GUI
+		
 		if(cg != null)
 			cg.connectionFailed();
 		if(cgt != null)
@@ -124,10 +120,7 @@ public class Client  {
 			
 	}
 
-	/*
-	 * a class that waits for the message from the server and append them to the JTextArea
-	 * if we have a GUI or simply System.out.println() it in console mode
-	 */
+
 	class ListenFromServer extends Thread {
 
 		public void run() {
@@ -135,14 +128,14 @@ public class Client  {
 				try {
 					String msg = (String) input.readObject();	
 					if(cgt==null)
-						cg.append(msg + "\n");		// append to the ClientGUI JTextArea (or whatever)
+						cg.append(msg + "\n");		
 					else if(cg==null)
 						cgt.append(msg + "\n");
 						
 					
 				}
 				catch(IOException e) {
-					//display("Server has close the connection: " + e);
+				
 					if(cg != null) 
 						cg.connectionFailed();
 					if(cgt != null)
@@ -150,7 +143,7 @@ public class Client  {
 						
 					break;
 				}
-				// can't happen with a String object but need the catch anyhow
+				
 				catch(ClassNotFoundException e2) {
 				}
 			}

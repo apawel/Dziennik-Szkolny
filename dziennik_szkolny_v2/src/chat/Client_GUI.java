@@ -113,11 +113,8 @@ boolean correct = false;
 	private static final long serialVersionUID = 1L;
 	
 	private LoginStudent loginStudent;
-	// if it is for connection
 	private boolean connected;
-	// the Client object
 	private Client client;
-	// the default port number
 	private int defaultPort;
 	private String defaultHost;
 	private JTextArea textArea;
@@ -218,7 +215,7 @@ boolean correct = false;
 		
 		textArea = new JTextArea();
 		textArea.setTabSize(5);
-		dol_.add(textArea);
+	//	dol_.add(textArea);
 		
 		txt_messages = new JTextField();
 		dol_.add(txt_messages, BorderLayout.SOUTH);
@@ -226,6 +223,7 @@ boolean correct = false;
 		txt_messages.setText("Tu wpisz swoj¹ wiadomoœæ");
 		
 		scrollPane = new JScrollPane(textArea);
+		scrollPane.setViewportView(textArea);
 		dol_.add(scrollPane, BorderLayout.CENTER);		
 	
 		txt_messages.requestFocus();
@@ -235,34 +233,34 @@ boolean correct = false;
 		btnWyloguj.setEnabled(false);
 		btnKtoJestDostpny.setEnabled(false);
 	
-		// reset port number and host name as a construction time
+
 		txt_port.setText("" + defaultPort);
 		txt_adres_serwara.setText(defaultHost);
-		// let the user change them
+
 		txt_adres_serwara.setEditable(false);
 		txt_port.setEditable(false);
-		// don't react to a <CR> after the username
+	
 		txt_messages.removeActionListener(this);
 		connected = false;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		// if it is the Logout button
+		
 		if(o == btnWyloguj) {
 			client.sendMessage(new ChatMessage(ChatMessage.Action.LOGOUT, ""));
 			
 			return;
 		}
-		// if it the who is in button
+		
 		if(o == btnKtoJestDostpny) {
 			client.sendMessage(new ChatMessage(ChatMessage.Action.WHOISIN, ""));				
 			return;
 		}
 
-		// ok it is coming from the JTextField
+		
 		if(connected) {
-			// just have to send the message
+			
 			client.sendMessage(new ChatMessage(ChatMessage.Action.MESSAGE, txt_messages.getText()));				
 			txt_messages.setText("");
 			return;
@@ -270,16 +268,15 @@ boolean correct = false;
 		
 
 		if(o == btnPocz) {
-			// ok it is a connection request
-			String pesel = txt_pesel.getText().trim();
-			// empty username ignore it
+			
+			String pesel = txt_pesel.getText().trim();		
 			if(pesel.length() == 0)
 				return;
-			// empty serverAddress ignore it
+			
 			String server = txt_adres_serwara.getText().trim();
 			if(server.length() == 0)
 				return;
-			// empty or invalid port numer, ignore it
+		
 			String portNumber = txt_port.getText().trim();
 			if(portNumber.length() == 0)
 				return;
@@ -292,9 +289,7 @@ boolean correct = false;
 			}
 
 			
-			/**
-			 * tu wywolanie metody do logowania z login_gui login jako uczen i pobranie imienia i nazwiska ucznia
-			 */
+			
 
 			pesel_blad_znak.setVisible(false);				    	
     		loginStudent = new LoginStudent();
@@ -311,22 +306,16 @@ boolean correct = false;
 		e1.printStackTrace();
 	}
     
-			client = new Client(server, port, username, this);
-			// test if we can start the Client
+			client = new Client(server, port, username, this);			
 			if(!client.start()) 
 				return;
 			txt_messages.setText("");			
-			connected = true;
-			
-			// disable login button
-			btnPocz.setEnabled(false);
-			// enable the 2 buttons
+			connected = true;			
+			btnPocz.setEnabled(false);			
 			btnWyloguj.setEnabled(true);
-			btnKtoJestDostpny.setEnabled(true);
-			// disable the Server and Port JTextField
+			btnKtoJestDostpny.setEnabled(true);			
 			txt_adres_serwara.setEditable(false);
-			txt_port.setEditable(false);
-			// Action listener for when the user enter a message
+			txt_port.setEditable(false);			
 			txt_messages.addActionListener(this);
 			
 		}
@@ -335,8 +324,7 @@ boolean correct = false;
 		textArea.append(str);
 		textArea.setCaretPosition(textArea.getText().length() - 1);
 	}
-	// called by the GUI is the connection failed
-	// we reset our buttons, label, textfield
+	
 	
 
 }

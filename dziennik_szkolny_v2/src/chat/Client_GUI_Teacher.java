@@ -2,6 +2,8 @@ package chat;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FileDialog;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +16,9 @@ import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -26,6 +31,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 import model.Teacher;
+import javax.swing.JScrollPane;
 
 public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 
@@ -33,11 +39,8 @@ public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// if it is for connection
 	private boolean connected;
-	// the Client object
 	private Client client;
-	// the default port number
 	private int defaultPort;
 	private String defaultHost;
 	private JTextArea textArea;
@@ -51,6 +54,8 @@ public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 	private JTextField txt_port;
 	private JTextField txt_messages;
 private Teacher wychowawca;
+private JButton btnWyliPliktekst;
+private JScrollPane scrollPane;
 	public static void main(String[] args) {
 		new Client_GUI();
 	}
@@ -110,53 +115,92 @@ private Teacher wychowawca;
 		btnKtoJestDostpny.addActionListener(this);
 		btnKtoJestDostpny.setEnabled(false);
 		
+		btnWyliPliktekst = new JButton("Wy\u015Bli plik(tekst)");
+		btnWyliPliktekst.addActionListener(this);
+			
+		btnWyliPliktekst.setEnabled(false);
+		gora_.add(btnWyliPliktekst);
+		
 		JPanel dol_ = new JPanel();
 		splitPane.setRightComponent(dol_);
 		dol_.setLayout(new BorderLayout(0, 0));
 		
-		
 		textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setTabSize(5);
-		dol_.add(textArea);
 		
 		txt_messages = new JTextField();
 		dol_.add(txt_messages, BorderLayout.SOUTH);
 		
 		txt_messages.setText("Tu wpisz swoj¹ wiadomoœæ");
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setViewportView(textArea);
+		dol_.add(scrollPane, BorderLayout.CENTER);
+		
+		
+		
+	//	dol_.add(textArea);
 		txt_messages.requestFocus();
 	}
 	void connectionFailed() {
 		btnPocz.setEnabled(true);
 		btnPocz.setEnabled(false);
 		btnKtoJestDostpny.setEnabled(false);
+		btnWyliPliktekst.setEnabled(false);
 	
-		// reset port number and host name as a construction time
+		
 		txt_port.setText("" + defaultPort);
 		txt_adres_serwara.setText(defaultHost);
-		// let the user change them
+		
 		txt_adres_serwara.setEditable(false);
 		txt_port.setEditable(false);
-		// don't react to a <CR> after the username
+		
 		txt_messages.removeActionListener(this);
 		connected = false;
 	}
 	
+	@SuppressWarnings("resource")
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		// if it is the Logout button
+	
 		if(o == btnWyloguj) {
 			client.sendMessage(new ChatMessage(ChatMessage.Action.LOGOUT, ""));
 			return;
 		}
-		// if it the who is in button
+
 		if(o == btnKtoJestDostpny) {
 			client.sendMessage(new ChatMessage(ChatMessage.Action.WHOISIN, ""));				
 			return;
 		}
+		if(o == btnWyliPliktekst)
+		{
+			FileDialog fd;
+			String plik, msg;
+			Scanner odczyt;
+			Frame a=null;
+			fd = new FileDialog(this, "Wczytaj", FileDialog.LOAD);
+			fd.setVisible(true);
+			plik = fd.getFile();
+			msg="";
+			try {
+				odczyt = new Scanner(new File(plik));
+				while (odczyt.hasNext()) {
+					msg+=odczyt.nextLine()+"\n";
+				}
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
+			client.sendMessage(new ChatMessage(ChatMessage.Action.MESSAGE,"--Wychowawca-- \n" + msg));				
+			txt_messages.setText("");
+			return;
+		}
 
-		// ok it is coming from the JTextField
+		
 		if(connected) {
-			// just have to send the message
+			
 			client.sendMessage(new ChatMessage(ChatMessage.Action.MESSAGE,"--Wychowawca-- " + txt_messages.getText()));				
 			txt_messages.setText("");
 			return;
@@ -164,15 +208,11 @@ private Teacher wychowawca;
 		
 
 		if(o == btnPocz) {
-			// ok it is a connection request
-			
-			// empty username ignore it
 		
-			// empty serverAddress ignore it
 			String server = txt_adres_serwara.getText().trim();
 			if(server.length() == 0)
 				return;
-			// empty or invalid port numer, ignore it
+			
 			String portNumber = txt_port.getText().trim();
 			if(portNumber.length() == 0)
 				return;
@@ -184,27 +224,21 @@ private Teacher wychowawca;
 				return; 
 			}
 
-			// try creating a new Client with GUI
-			/**
-			 * tu wywolanie metody do logowania z login_gui login jako uczen i pobranie imienia i nazwiska ucznia
-			 * pobrac wczesniejsze dane, przekazac tutaj TEACHER:) i z niego imie i nazwisko:)
-			 */
+			
+			
 			client = new Client(server, port, wychowawca.getFirstName() + " " + wychowawca.getLastName(), this);
-			// test if we can start the Client
+		
 			if(!client.start()) 
 				return;
 			txt_messages.setText("");			
 			connected = true;
 			
-			// disable login button
-			btnPocz.setEnabled(false);
-			// enable the 2 buttons
+			btnPocz.setEnabled(false);	
 			btnWyloguj.setEnabled(true);
 			btnKtoJestDostpny.setEnabled(true);
-			// disable the Server and Port JTextField
+			btnWyliPliktekst.setEnabled(true);			
 			txt_adres_serwara.setEditable(false);
-			txt_port.setEditable(false);
-			// Action listener for when the user enter a message
+			txt_port.setEditable(false);			
 			txt_messages.addActionListener(this);
 			
 		}
@@ -213,8 +247,7 @@ private Teacher wychowawca;
 		textArea.append(str);
 		textArea.setCaretPosition(textArea.getText().length() - 1);
 	}
-	// called by the GUI is the connection failed
-	// we reset our buttons, label, textfield
+	
 	
 
 }

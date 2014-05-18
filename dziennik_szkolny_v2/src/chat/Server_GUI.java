@@ -47,9 +47,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 	private JButton btnRozpocznijZebranie;
 	private JScrollPane scrollPane;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,9 +61,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	void appendEvent(String str) {
 		txtrEventy.append(str);
 		
@@ -123,7 +119,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 		// gdy server istnieje
 		if(server != null) {
 			try {
-				server.stop();			// ask the server to close the conection
+				server.stop();			
 			}
 			catch(Exception eClose) {
 			}
@@ -135,7 +131,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 	}
 	public void actionPerformed(ActionEvent arg0) {
 	
-		//System.out.println("PORT PORT!!!!!!!!!!! " + port)
+
 		if(server != null) {
 			server.stop();
 			server = null;
@@ -154,7 +150,7 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 		}
 		
 		server = new Server(port, this);
-		// and start it as a thread
+
 		new ServerRunning().start();
 		btnRozpocznijZebranie.setText("Zakoñcz zebranie");
 		txt_port.setEditable(false);
@@ -162,8 +158,8 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 	
 	class ServerRunning extends Thread {
 		public void run() {
-			server.start();         // should execute until if fails
-			// the server failed
+			server.start();      
+
 			btnRozpocznijZebranie.setText("Start");
 			txt_port.setEditable(true);
 			appendEvent("Serwer zostal zamkniêty\n");
