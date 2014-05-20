@@ -70,6 +70,11 @@ public class AdminGUI extends JFrame {
 		mnDodaj.add(mntmUcze);
 		
 		JMenuItem mntmKlasa = new JMenuItem("Klasa");
+		mntmKlasa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane,"Klasa");
+			}
+		});
 		mnDodaj.add(mntmKlasa);
 		
 		JMenu mnEdytuj = new JMenu("Edytuj");
@@ -112,6 +117,9 @@ public class AdminGUI extends JFrame {
 		
 		JPanel addStudent = new addStudent_GUI();
 		contentPane.add("Ucze\u0144",addStudent);
+		
+		JPanel addSchoolClass = new AddSchoolClass_GUI();
+		contentPane.add("Klasa",addSchoolClass);
 		
 		
 		

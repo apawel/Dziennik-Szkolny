@@ -36,7 +36,7 @@ public class MainClass {
 
 		ManageSchoolClass MSC = new ManageSchoolClass();
 	/* try {
-		MSC.addSchoolClass(MT.getTeacherbyPIN("92062410079"), "1D","2013" , "2014");
+		MSC.addSchoolClass(MT.getTeacherbyPIN("92062410079"), "1D","2013" , "2014");local
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

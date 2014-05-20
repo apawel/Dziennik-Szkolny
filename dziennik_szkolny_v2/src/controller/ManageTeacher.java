@@ -125,7 +125,7 @@ public void saveTeacher(Teacher teacher)
 		      List<Teacher> teachers = null;
 		      try{
 		         tx = session.beginTransaction();		      
-		         teachers  = (List<Teacher>) session.createQuery("select from Teacher where Teacher.name = ").list();				
+		         teachers  = (List<Teacher>) session.createQuery("FROM Teacher").list();				
 		         tx.commit(); 
 		         
 		      }catch (HibernateException e) {
