@@ -1,37 +1,28 @@
 package chat;
 
 import java.awt.BorderLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.Component;
-
-import javax.swing.JLabel;
-
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.ExecutionException;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.CompoundBorder;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
-import controller.ManageStudent;
 import model.Student;
-import model.Teacher;
-import view.Student_GUI;
-import view.Teacher_GUI;
-
-import javax.swing.JScrollBar;
+import controller.ManageStudent;
 
 
 /**

@@ -1,15 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Subject;
-
-
-
-
-
-import model.Teacher;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

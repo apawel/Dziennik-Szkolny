@@ -8,13 +8,13 @@
             <column name="idStudentNote" />
             <generator class="identity" />
         </id>
-        <many-to-one name="teacher" class="model.Teacher" fetch="select">
+        <many-to-one name="teacher" class="model.Teacher" fetch="select" lazy="false">
             <column name="Teacher_idTeacher" not-null="true" />
         </many-to-one>
-        <many-to-one name="student" class="model.Student" fetch="select">
+        <many-to-one name="student" class="model.Student" fetch="select" lazy="false">
             <column name="Student_idStudent" not-null="true" />
         </many-to-one>
-        <property name="noteContents" type="string">
+        <property name="noteContents" type="string" lazy="false">
             <column name="noteContents" length="65535" not-null="true" />
         </property>
     </class>

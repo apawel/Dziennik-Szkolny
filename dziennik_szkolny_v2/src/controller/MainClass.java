@@ -1,14 +1,7 @@
 package controller;
 import java.sql.Date;
-import java.util.Iterator;
 
-import model.*;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import utils.HibernateUtil;
+import model.SchoolClass;
 
 public class MainClass {
 

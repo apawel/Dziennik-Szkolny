@@ -1,44 +1,39 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Iterator;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JButton;
 
 import model.Student;
 import model.StudentNote;
 import model.Student_Teacher;
 import model.SubjectMark;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import java.util.Date;
-import java.util.Iterator;
-
-import javax.swing.JSplitPane;
-
 import controller.ManageStudent;
-
-import java.awt.Component;
-
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 public class Student_Subject_GUI extends JFrame {
 
-	private JPanel contentPane;
+	public JPanel contentPane;
 	private JTextField txtImieINazwisko;
 	private JTable table_oceny;
 	private JTable table_uwagi;
 	private int liczba_wierszy;
+	private Student student;
+	private ManageStudent MS;
 
 	public Student_Subject_GUI(final Student_Teacher student_subject) {
 		super(student_subject.getStudent().getFirstName() + " "
@@ -48,6 +43,9 @@ public class Student_Subject_GUI extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 557, 359);
 		contentPane = new JPanel();
+	
+
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -106,8 +104,8 @@ public class Student_Subject_GUI extends JFrame {
 				dispose();
 			}
 		});
-ManageStudent MS = new ManageStudent();
-Student student = MS.getStudentbyId(student_subject.getStudent().getIdStudent()) ;
+ MS = new ManageStudent();
+ student = MS.getStudentbyId(student_subject.getStudent().getIdStudent()) ;
 		Iterator it = student.getSubjectMarks().iterator();
 
 		Object[][] obiekty;
@@ -200,16 +198,19 @@ Student student = MS.getStudentbyId(student_subject.getStudent().getIdStudent())
 		
 		//table_uwagi.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 		scrolluj_uwagusie.setViewportView(table_uwagi);
+		
 		btnWpiszUwage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Add_StudentNote_GUI adduwaga = new Add_StudentNote_GUI(
 						student_subject);
+			//	student = MS.getStudentbyId(student_subject.getStudent().getIdStudent()) ;
 			}
 		});
 		btnDodajOcene.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Add_Ocena_GUI add_subjectmark_gui = new Add_Ocena_GUI(
 						student_subject);
+				//student = MS.getStudentbyId(student_subject.getStudent().getIdStudent()) ;
 
 			}
 		});

@@ -1,30 +1,25 @@
 package view;
 
 import java.awt.EventQueue;
-
-import model.*;
-import controller.*;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.SwingWorker;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import java.awt.event.ActionListener;
 import java.util.concurrent.ExecutionException;
 
-import javax.swing.JPasswordField;
-
-import org.omg.CORBA.ExceptionList;
-
-import antlr.collections.List;
-import controller.ManageTeacher;
-
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingWorker;
+
+import model.SchoolClass;
+import model.Student;
+import model.Teacher;
+import controller.ManageSchoolClass;
+import controller.ManageStudent;
+import controller.ManageTeacher;
+//base64 -technika zapisywania plikow binarnych za pomoca tekstu
 
 public class Login_GUI {
 
@@ -128,18 +123,13 @@ public class Login_GUI {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public Login_GUI() {
 
 		initialize();
 
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
 	public boolean isCorrect(char[] passDB, char[] passtxt) {
 
 		if (passDB.length != passtxt.length)
@@ -206,7 +196,7 @@ public class Login_GUI {
 
 		if (txt_pesel.getText().length() != 11)
 			throw new NumberFormatException();
-
+//moze zmienic na pobranie calej klasy i wybranie ucznia.....
 		ManageStudent MS = new ManageStudent();
 		student = MS.getStudentbyPIN(txt_pesel.getText());
 		char[] password = passwordField.getPassword();

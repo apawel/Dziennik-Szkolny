@@ -3,14 +3,10 @@ package controller;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 import model.SchoolClass;
-import model.Subject;
 import model.Teacher;
 
 import org.hibernate.HibernateException;
@@ -88,7 +84,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	   public ArrayList<SchoolClass> getAllSchoolClassBySubject(Integer subjectID)
 	   {
 		   ArrayList list = (ArrayList) getSession().createCriteria(SchoolClass.class)
-	                .add(Restrictions.eq("Subject.idSubject", subjectID))//nie pamietam jak jest  w bazie sprawdzic konieczne.....
+	                .add(Restrictions.eq("Subject.idSubject", subjectID))
 	                .list();
 		   Iterator it = (Iterator) list.iterator();
 			for(int i =0;i<list.size();i++)

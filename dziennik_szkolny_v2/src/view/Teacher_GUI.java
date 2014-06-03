@@ -1,28 +1,22 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Set;
 
-import javassist.bytecode.Descriptor.Iterator;
-
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 
-import controller.ManageSchoolClass;
 import model.SchoolClass;
 import model.Subject;
 import model.Teacher;
 import model.Teacher_Class;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Set;
+import controller.ManageSchoolClass;
 
 public class Teacher_GUI extends JFrame {
 

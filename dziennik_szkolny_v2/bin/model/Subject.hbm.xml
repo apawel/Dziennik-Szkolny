@@ -11,19 +11,19 @@
         <property name="name" type="string">
             <column name="name" length="45" not-null="true" />
         </property>
-        <set name="teachers" table="Teacher" inverse="true" lazy="true" fetch="select">
+        <set name="teachers" table="Teacher" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="Subject_idSubject" not-null="true" />
             </key>
             <one-to-many class="model.Teacher" />
         </set>
-        <set name="subjectMarks" table="SubjectMark" inverse="true" lazy="true" fetch="select">
+        <set name="subjectMarks" table="SubjectMark" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="Subject_idSubject" not-null="true" />
             </key>
             <one-to-many class="model.SubjectMark" />
         </set>
-        <set name="schoolClasses" table="SchoolClass_has_Subject" inverse="false" lazy="true" fetch="select">
+        <set name="schoolClasses" table="SchoolClass_has_Subject" inverse="false" lazy="false" fetch="select">
             <key>
                 <column name="Subject_idSubject" not-null="true" />
             </key>

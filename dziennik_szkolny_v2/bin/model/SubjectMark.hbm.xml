@@ -10,10 +10,10 @@
   </id>
   <timestamp column="timeStamp" generated="never" name="timeStamp"
    source="vm" unsaved-value="null"/>
-  <many-to-one class="model.Student" fetch="select" name="student">
+  <many-to-one class="model.Student" fetch="select" lazy="false" name="student">
    <column name="Student_idStudent" not-null="true"/>
   </many-to-one>
-  <many-to-one class="model.Subject" fetch="select" name="subject">
+  <many-to-one class="model.Subject" fetch="select" lazy="false" name="subject">
    <column name="Subject_idSubject" not-null="true"/>
   </many-to-one>
   <property generated="never" lazy="false" name="value" type="double">

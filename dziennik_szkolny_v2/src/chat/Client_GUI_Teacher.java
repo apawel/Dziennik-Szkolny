@@ -1,37 +1,30 @@
 package chat;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.FileDialog;
-import java.awt.Frame;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.Component;
-
-import javax.swing.JLabel;
-
+import java.awt.FileDialog;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
+import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
+import controller.ManageSchoolClass;
+import model.SchoolClass;
 import model.Teacher;
-import javax.swing.JScrollPane;
 
 public class Client_GUI_Teacher extends JFrame implements ActionListener  {
 
@@ -175,6 +168,8 @@ private JScrollPane scrollPane;
 		}
 		if(o == btnWyliPliktekst)
 		{
+			ManageSchoolClass MSC = new ManageSchoolClass();
+			(MSC.getSchoolClassbyTeacherID(wychowawca.getIdTeacher())).saveListOfStudentsToFile();
 			FileDialog fd;
 			String plik, msg;
 			Scanner odczyt;

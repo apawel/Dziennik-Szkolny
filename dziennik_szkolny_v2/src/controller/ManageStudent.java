@@ -6,12 +6,11 @@ import java.sql.Date;
 
 import model.SchoolClass;
 import model.Student;
-import model.Teacher;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
@@ -74,9 +73,10 @@ public class ManageStudent extends HibernateDaoSupport {
 		      try{
 		         tx = session.beginTransaction();	
 		         
-		         String hql = "FROM Student T WHERE T.personalIdentityNumber = "+Pin;
+		        /* String hql = "FROM Student T WHERE T.personalIdentityNumber = "+Pin;
 		         Query query = session.createQuery(hql);
-		         student = (Student) query.list().get(0);				         
+		         student = (Student) query.list().get(0);*/
+		         student = (Student) session.createCriteria(Student.class).add(Restrictions.eqOrIsNull("personalIdentityNumber", Pin)).uniqueResult();
 		         tx.commit(); 
 		         
 		      }catch (HibernateException e) {

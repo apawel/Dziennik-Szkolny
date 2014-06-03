@@ -1,37 +1,27 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Iterator;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JList;
 
 import model.Student;
 import model.StudentNote;
 import model.SubjectMark;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.CardLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.SwingConstants;
-
-import java.awt.Component;
-
-import javax.swing.JSplitPane;
-
-import java.awt.FlowLayout;
-import java.util.Date;
-import java.util.Iterator;
-
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import controller.ManageStudent;
 
 public class Student_GUI extends JFrame {
 
@@ -45,7 +35,7 @@ public class Student_GUI extends JFrame {
 	 */
 	public Student_GUI(Student student) {
 		super(student.getFirstName() +" "+ student.getLastName());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 618, 264);
 		setVisible(true);
 		contentPane = new JPanel();
@@ -73,6 +63,7 @@ public class Student_GUI extends JFrame {
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		JSplitPane splitPane_1 = new JSplitPane();
+		splitPane_1.setContinuousLayout(true);
 		splitPane_1.setResizeWeight(0.5);
 		splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		panel_2.add(splitPane_1);
@@ -82,9 +73,9 @@ public class Student_GUI extends JFrame {
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		
+		ManageStudent MS = new ManageStudent();
 		
-		
-		
+		student = MS.getStudentbyId(student.getIdStudent());
 		Iterator it = student.getSubjectMarks().iterator();
 		
 		Object[][] obiekty;
@@ -96,7 +87,7 @@ public class Student_GUI extends JFrame {
 			obiekty[i][0] = temp.getValue();
 			obiekty[i][1] = temp.getWeight();
 			Date data = temp.getTimeStamp();
-			obiekty[i][2] = data.getMonth() + "-" + data.getDay() + " " + data.getHours()+":"+data.getMinutes();
+			obiekty[i][2] = data.toLocaleString();//data.getMonth() + "-" + data.getDay() + " " + data.getHours()+":"+data.getMinutes();
 			obiekty[i][3] = temp.getSubject().getName();
 			obiekty[i][4] = temp.getDescription();
 			i++;
@@ -108,8 +99,8 @@ public class Student_GUI extends JFrame {
 		
 		
 		oceny = new JTable();
+		oceny.setAlignmentX(Component.LEFT_ALIGNMENT);
 		oceny.setFillsViewportHeight(true);
-		
 		oceny.setModel(new DefaultTableModel(obiekty, new String[] {
 				"Ocena", "Waga", "Kiedy","Przedmiot", "Opis" }) {
 			boolean[] columnEditables = new boolean[] { false, false, false,
@@ -123,14 +114,23 @@ public class Student_GUI extends JFrame {
 		
 		//panel_3.add(oceny, BorderLayout.CENTER);
 		
+		oceny.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		oceny.getColumnModel().getColumn(0).setPreferredWidth(58);
+		oceny.getColumnModel().getColumn(1).setPreferredWidth(46);
+		oceny.getColumnModel().getColumn(2).setPreferredWidth(112);
+		oceny.getColumnModel().getColumn(3).setPreferredWidth(148);
+		oceny.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		
 		JScrollPane oceny_scroll = new JScrollPane();
-		panel_3.add(oceny_scroll, BorderLayout.NORTH);
+		panel_3.add(oceny_scroll, BorderLayout.CENTER);
+		oceny_scroll.setViewportView(oceny);
+		
 		
 		JPanel panel_4 = new JPanel();
 		splitPane_1.setRightComponent(panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		///////////////////////////
-		
+	
 		
 		
 		i = 0;
@@ -149,6 +149,7 @@ public class Student_GUI extends JFrame {
 		}
 		uwagi = new JTable();
 		uwagi.setFillsViewportHeight(true);
+
 		uwagi.setModel(new DefaultTableModel(
 			obiekty,
 			new String[] {
@@ -164,10 +165,16 @@ public class Student_GUI extends JFrame {
 		});
 		//panel_4.add(uwagi, BorderLayout.CENTER);
 		
+		uwagi.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		uwagi.getColumnModel().getColumn(0).setPreferredWidth(5);
+		uwagi.getColumnModel().getColumn(1).setPreferredWidth(100);
+		
+		uwagi.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		
 		JScrollPane uwagi_scroll = new JScrollPane();
-		panel_4.add(uwagi_scroll, BorderLayout.NORTH);
-		oceny_scroll.setViewportView(oceny);
+		panel_4.add(uwagi_scroll, BorderLayout.CENTER);
 		uwagi_scroll.setViewportView(uwagi);
+		
 		btnWyloguj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();

@@ -1,31 +1,28 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.security.auth.Subject;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import model.SchoolClass;
 import model.Teacher;
 import controller.ManageSchoolClass;
 import controller.ManageSubject;
 import controller.ManageTeacher;
-
-import javax.swing.JScrollPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.ListSelectionModel;
 
 public class AddSchoolClass_GUI extends JPanel {
 	private JTextField txt_class_name;
@@ -74,8 +71,21 @@ public class AddSchoolClass_GUI extends JPanel {
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		DefaultListModel model = new DefaultListModel<>();
+		
 		 list_subjects = new JList(model);
 		 list_subjects.setValueIsAdjusting(true);
+		 list_subjects.setSelectionModel(new DefaultListSelectionModel() {
+			    @Override
+			    public void setSelectionInterval(int index0, int index1) {
+			        if(super.isSelectedIndex(index0)) {
+			            super.removeSelectionInterval(index0, index1);
+			        }
+			        else {
+			            super.addSelectionInterval(index0, index1);
+			        }
+			    }
+			});
+		// list_subjects.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 	//	panel_1.add(list_subjects, BorderLayout.CENTER);
 		
 		JScrollPane scrollPane = new JScrollPane(list_subjects);
@@ -99,8 +109,17 @@ public class AddSchoolClass_GUI extends JPanel {
 		 btnZapisz.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		ManageSchoolClass MSC = new ManageSchoolClass();
-		 		MSC.addSchoolClass(teachers.get(comboBox_ClassMaster.getSelectedIndex()), txt_class_name.getText(), yearStart.getValue()+"", ((Integer)yearStart.getValue()+1)+"");
+		 	int SchoolClassID =	MSC.addSchoolClass(teachers.get(comboBox_ClassMaster.getSelectedIndex()), txt_class_name.getText(), yearStart.getValue()+"", ((Integer)yearStart.getValue()+1)+"");
+		 		SchoolClass schoolClass = MSC.getSchoolClass(SchoolClassID);
+		 	int[] selected =	list_subjects.getSelectedIndices();
+		 	ManageSubject MS = new ManageSubject();
+		 	for(int i =0;i<selected.length;i++)
+		 	{
+		 		schoolClass.getSubjects().add(przedmioty.get(selected[i]));
 		 	}
+		 	MSC.updateDB(schoolClass);
+		 	}
+		 	
 		 });
 		panel_2.add(btnZapisz);
 

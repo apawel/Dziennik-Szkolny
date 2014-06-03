@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import model.Student;
 import model.StudentNote;
-import model.SubjectMark;
 import model.Teacher;
 
 import org.hibernate.HibernateException;

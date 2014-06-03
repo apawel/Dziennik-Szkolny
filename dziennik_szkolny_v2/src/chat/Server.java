@@ -1,8 +1,12 @@
 package chat;
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Server {
@@ -182,7 +186,7 @@ public class Server {
 				String message = cm.getMessage();
 
 				switch(cm.getType()) {
-				//tutaj mozna dodac wiecej akcji  np whipser dla wychowawcy do poszczegiolny rodzicow
+				
 
 				case ChatMessage.Action.MESSAGE:
 					broadcast(username + ": " + message);
@@ -199,10 +203,7 @@ public class Server {
 						writeMsg((i+1) + ") " + ct.username);
 					}
 					break;
-				case ChatMessage.Action.KICK:
-					break;
-				case ChatMessage.Action.LOGIN:
-					break;
+			
 				}
 			}
 			

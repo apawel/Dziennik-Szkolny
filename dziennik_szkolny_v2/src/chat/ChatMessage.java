@@ -1,5 +1,5 @@
 package chat;
-import java.io.*;
+import java.io.Serializable;
 /*
  * This class defines the different type of messages that will be exchanged between the
  * Clients and the Server. 
@@ -11,8 +11,6 @@ public class ChatMessage implements Serializable {
 	 public static final int WHOISIN =0;
 	 public static final int MESSAGE =1;
 	 public static final int LOGOUT =2;
-	 public static final int KICK =3;
-	 public static final int LOGIN =4;
 	 
  }
 	protected static final long serialVersionUID = 1112122200L;
@@ -20,13 +18,13 @@ public class ChatMessage implements Serializable {
 	private int type;
 	private String message;
 	
-	// constructor
+	
 	ChatMessage(int type, String message) {
 		this.type = type;
 		this.message = message;
 	}
 	
-	// getters
+	
 	int getType() {
 		return type;
 	}

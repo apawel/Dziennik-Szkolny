@@ -4,16 +4,16 @@ package controller;
 
 import java.util.List;
 
+import model.Subject;
+import model.Teacher;
+
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
-import model.Subject;
-import model.Teacher;
 
 public class ManageTeacher extends HibernateDaoSupport{
 
@@ -89,7 +89,7 @@ public void saveTeacher(Teacher teacher)
 	    return (Teacher) getSession().createCriteria(Teacher.class).add(Restrictions.eqOrIsNull("personalIdentityNumber", Pin)).uniqueResult();
 	   }
 	   
-			   public Teacher getTeacherbyPIN(String Pin) throws Exception
+		 public Teacher getTeacherbyPIN(String Pin) throws Exception
 			   {
 				   Session session = HibernateUtil.getSessionFactory().openSession();
 				      Transaction tx = null;
@@ -97,10 +97,11 @@ public void saveTeacher(Teacher teacher)
 				      try{
 				         tx = session.beginTransaction();	
 				         
-				         String hql = "FROM Teacher T WHERE T.personalIdentityNumber = "+Pin;
-				         Query query = session.createQuery(hql);
-				         teacher = (Teacher) query.list().get(0);
-				         
+				       //  String hql = "FROM Teacher T WHERE T.personalIdentityNumber = "+Pin;
+				      /*   Query query = session.//createQuery(hql);
+				         teacher = (Teacher) query.list().get(0);*/
+				         teacher = (Teacher) session.createCriteria(Teacher.class).add(Restrictions.eqOrIsNull("personalIdentityNumber", Pin)).uniqueResult();
+				         				         
 				         tx.commit(); 
 				         
 				      }catch (HibernateException e) {
