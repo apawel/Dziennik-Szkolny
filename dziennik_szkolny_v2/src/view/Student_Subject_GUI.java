@@ -27,6 +27,10 @@ import controller.ManageStudent;
 
 public class Student_Subject_GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public JPanel contentPane;
 	private JTextField txtImieINazwisko;
 	private JTable table_oceny;

@@ -2,6 +2,7 @@ package controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Subject;
@@ -18,7 +19,22 @@ import utils.HibernateUtil;
 public class ManageTeacher extends HibernateDaoSupport{
 
 	
-	
+	static   public void updateTeacher(Teacher teacher)
+	   {
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;		   
+		      try{
+		         tx = session.beginTransaction();
+		         session.update(teacher); 		
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+	   }
 /*save teacher*/
 public void saveTeacher(Teacher teacher)
 {
@@ -118,15 +134,15 @@ public void saveTeacher(Teacher teacher)
 			   
 	   /* Method to GET all teachers from the DB */
 	   @SuppressWarnings("unchecked")
-	public List<Teacher> getAllTeachers()
+	static public ArrayList<Teacher> getAllTeachers()
 	   {
 		
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
-		      List<Teacher> teachers = null;
+		      ArrayList<Teacher> teachers = null;
 		      try{
 		         tx = session.beginTransaction();		      
-		         teachers  = (List<Teacher>) session.createQuery("FROM Teacher").list();				
+		         teachers  = (ArrayList<Teacher>) session.createQuery("FROM Teacher").list();				
 		         tx.commit(); 
 		         
 		      }catch (HibernateException e) {

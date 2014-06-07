@@ -20,14 +20,11 @@ public class ManageSubjectMark extends HibernateDaoSupport {
 		
 	}
 	
-	/*save subjectmark*/
-	public void saveSubjectMark(SubjectMark subjectMark)
-	{
-	getHibernateTemplate().save(subjectMark);	
-	}
+
+
 
 	 /* Method to CREATE an SubjectMark in the database */
-	   public Integer addSubjectMark(Student student, Subject subject, double value, int weight,
+	  static public Integer addSubjectMark(Student student, Subject subject, double value, int weight,
 				String description){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
 	      Transaction tx = null;
@@ -46,7 +43,7 @@ public class ManageSubjectMark extends HibernateDaoSupport {
 	      return  subjectMarkID;
 	   }
 	   @SuppressWarnings("unchecked")
-	public ArrayList<SubjectMark> getAllSubjectMark()
+	   static public ArrayList<SubjectMark> getAllSubjectMark()
 	   {
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
@@ -67,7 +64,7 @@ public class ManageSubjectMark extends HibernateDaoSupport {
 	   }
 	
 	   /* Method to DELETE an SubjectMark from the records */
-	   public void deleteSubjectMark(Integer subjectMarkID){
+	   static   public void deleteSubjectMark(Integer subjectMarkID){
 	      Session session = HibernateUtil.getSessionFactory().openSession();
 	      Transaction tx = null;
 	      try{

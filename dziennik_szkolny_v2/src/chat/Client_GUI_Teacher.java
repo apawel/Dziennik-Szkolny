@@ -159,11 +159,12 @@ private JScrollPane scrollPane;
 	
 		if(o == btnWyloguj) {
 			client.sendMessage(new ChatMessage(ChatMessage.Action.LOGOUT, ""));
+			dispose();
 			return;
 		}
 
 		if(o == btnKtoJestDostpny) {
-			client.sendMessage(new ChatMessage(ChatMessage.Action.WHOISIN, ""));				
+			client.sendMessage(new ChatMessage(ChatMessage.Action.WHOISON, ""));				
 			return;
 		}
 		if(o == btnWyliPliktekst)

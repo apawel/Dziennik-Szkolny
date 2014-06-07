@@ -16,10 +16,14 @@ import controller.ManageSubjectMark;
 
 public class Add_Ocena_GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JComboBox value;
+	private JComboBox<Double> value;
 
 	/**
 	 * Launch the application.
@@ -43,8 +47,7 @@ public class Add_Ocena_GUI extends JFrame {
 		JButton btnDodaj = new JButton("Dodaj");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ManageSubjectMark MSK = new ManageSubjectMark();
-				MSK.addSubjectMark(student_subject.getStudent(), student_subject.getTeacher().getSubject(), (double)value.getSelectedItem(), Integer.parseInt(textField.getText()), textField_1.getText());
+				ManageSubjectMark.addSubjectMark(student_subject.getStudent(), student_subject.getTeacher().getSubject(), (double)value.getSelectedItem(), Integer.parseInt(textField.getText()), textField_1.getText());
 				dispose();
 			}
 		});
@@ -62,7 +65,7 @@ public class Add_Ocena_GUI extends JFrame {
 		contentPane.add(btnAnuluj);
 		
 		
-		 value = new JComboBox();
+		 value = new JComboBox<Double>();
 		value.setBounds(88, 22, 46, 20);
 		contentPane.add(value);
 		value.addItem(1.0);

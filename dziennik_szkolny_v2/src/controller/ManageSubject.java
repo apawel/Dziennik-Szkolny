@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.SchoolClass;
 import model.Subject;
 
 import org.hibernate.HibernateException;
@@ -29,7 +30,7 @@ public class ManageSubject extends HibernateDaoSupport {
 		
 	}*/
 	/* Method to DELETE an subject from the records */
-	   public Integer addSubject(String name){
+	static   public Integer addSubject(String name){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
 	      Transaction tx = null;
 	      Integer subjectID = null;
@@ -64,7 +65,7 @@ public class ManageSubject extends HibernateDaoSupport {
 	      }
 	   }
 	  @SuppressWarnings("unchecked")
-	public ArrayList<Subject> getAllSubjects()
+	static public ArrayList<Subject> getAllSubjects()
 	   {
 		
 		   Session session = HibernateUtil.getSessionFactory().openSession();
@@ -102,6 +103,22 @@ public class ManageSubject extends HibernateDaoSupport {
 		      }
 		         return subject;
 		      
+	   }
+	static   public void updateSubject(Subject subject)
+	   {
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;		   
+		      try{
+		         tx = session.beginTransaction();
+		         session.update(subject); 		
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
 	   }
 	 /*  
 	   public Subject getSubject(String name){

@@ -19,6 +19,10 @@ import model.Teacher_Class;
 
 public class Class_GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**

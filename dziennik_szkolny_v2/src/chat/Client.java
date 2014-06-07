@@ -61,7 +61,7 @@ public class Client  {
 			return false;
 		}
 
-		// creates the Thread to listen from the server 
+		
 		new ListenFromServer().start();
 		
 		try

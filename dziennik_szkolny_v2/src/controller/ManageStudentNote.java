@@ -21,13 +21,9 @@ public class ManageStudentNote extends HibernateDaoSupport {
 	{
 		
 	}
-/*save student note*/
-	public void saveStudentNote(StudentNote studentNote)
-	{
-		getHibernateTemplate().save(studentNote);
-	}
+
 	 /* Method to CREATE an StudentNote in the database */
-	   public Integer addStudentNote(Teacher teacher, Student student, String noteContents){
+	 static  public Integer addStudentNote(Teacher teacher, Student student, String noteContents){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
 	      Transaction tx = null;
 	      Integer studentNoteID = null;
@@ -45,7 +41,7 @@ public class ManageStudentNote extends HibernateDaoSupport {
 	      return studentNoteID;
 	   }
 		@SuppressWarnings("unchecked")
-		public ArrayList<StudentNote> getAllStudentNote()
+		static	public ArrayList<StudentNote> getAllStudentNote()
 		   {
 			   Session session = HibernateUtil.getSessionFactory().openSession();
 			      Transaction tx = null;
@@ -65,7 +61,7 @@ public class ManageStudentNote extends HibernateDaoSupport {
 			   
 		   }
 	 	   /* Method to DELETE an StudentNote from the records */
-	   public void deleteStudentNote(Integer studentNoteID){
+		static   public void deleteStudentNote(Integer studentNoteID){
 	      Session session = HibernateUtil.getSessionFactory().openSession();
 	      Transaction tx = null;
 	      try{

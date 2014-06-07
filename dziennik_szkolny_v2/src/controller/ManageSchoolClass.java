@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.SchoolClass;
+import model.Subject;
 import model.Teacher;
 
 import org.hibernate.HibernateException;
@@ -22,12 +23,10 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	public ManageSchoolClass()
 	{		
 	}
-	/*get all schoolclass*/
-	public ArrayList<SchoolClass> getAllSchoolClass()
-	{
-		return  (ArrayList<SchoolClass>) getHibernateTemplate().loadAll(SchoolClass.class);
-		
-	}
+	
+	
+	
+
 	/*save school class*/
 	public void saveSchoolClass(SchoolClass schoolClass)
 	{
@@ -118,13 +117,9 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	    * @param teacherID
 	    * @return
 	    */
-	   public void updateSchoolClass(SchoolClass schoolClass)
-	   {
-			System.out.println("jestem klasa : " + schoolClass.getName() + " W update.");
-		   getHibernateTemplate().update("schoolclass", schoolClass);
-	   }
+	
 
-	   public void updateDB(SchoolClass schoolClass)
+	static   public void updateSchoolClass(SchoolClass schoolClass)
 	   {
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;		   
@@ -140,6 +135,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 		         session.close(); 
 		      }
 	   }
+	   
 	   public SchoolClass getSchoolClassbyTeacherID(Integer teacherID){
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
@@ -162,15 +158,15 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 		      
 	   }
 		@SuppressWarnings("unchecked")
-		public List<SchoolClass> getAllSchoolClasses()
+		static public ArrayList<SchoolClass> getAllSchoolClasses()
 		   {
 			
 			   Session session = HibernateUtil.getSessionFactory().openSession();
 			      Transaction tx = null;
-			      List<SchoolClass> schoolclass = null;
+			      ArrayList<SchoolClass> schoolclass = null;
 			      try{
 			         tx = session.beginTransaction();		      
-			         schoolclass  = (List<SchoolClass>) session.createQuery("FROM SchoolClass").list();				
+			         schoolclass  = (ArrayList<SchoolClass>) session.createQuery("FROM SchoolClass").list();				
 			         tx.commit(); 
 			         
 			      }catch (HibernateException e) {

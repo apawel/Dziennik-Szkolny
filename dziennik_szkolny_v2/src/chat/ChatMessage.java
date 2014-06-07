@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class ChatMessage implements Serializable {
  public class Action{
-	 public static final int WHOISIN =0;
+	 public static final int WHOISON =0;
 	 public static final int MESSAGE =1;
 	 public static final int LOGOUT =2;
 	 

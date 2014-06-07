@@ -22,6 +22,11 @@ import chat.Server_GUI;
 
 public class Class_Master_GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 
 	/**

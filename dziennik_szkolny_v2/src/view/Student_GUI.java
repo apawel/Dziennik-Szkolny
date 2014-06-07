@@ -25,6 +25,10 @@ import controller.ManageStudent;
 
 public class Student_GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable oceny;
 	private JTable uwagi;

@@ -17,6 +17,10 @@ import controller.ManageStudent;
 
 
 public class addStudent_GUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField imie_txt;
 	private JTextField nazwisko_txt;
 	private JTextField pesel_txt;
@@ -32,7 +36,6 @@ public class addStudent_GUI extends JPanel {
 	 */
 	public addStudent_GUI() {
 		setLayout(null);
-		final ManageSchoolClass MSC = new ManageSchoolClass();
 		JLabel lblImi = new JLabel("Imi\u0119:");
 		lblImi.setBounds(10, 11, 46, 14);
 		add(lblImi);
@@ -82,7 +85,7 @@ public class addStudent_GUI extends JPanel {
 		lblData.setBounds(10, 133, 109, 14);
 		add(lblData);
 		
-		final JComboBox comboBoxDzien = new JComboBox();
+		final JComboBox<Integer> comboBoxDzien = new JComboBox<Integer>();
 		comboBoxDzien.setBounds(114, 130, 46, 20);
 		add(comboBoxDzien);
 		for(int i =1; i<32;i++)
@@ -90,13 +93,13 @@ public class addStudent_GUI extends JPanel {
 			comboBoxDzien.addItem(i);
 		}
 		
-		final JComboBox comboBoxMiesiac = new JComboBox();
+		final JComboBox<Integer> comboBoxMiesiac = new JComboBox<Integer>();
 		comboBoxMiesiac.setBounds(170, 130, 46, 20);
 		add(comboBoxMiesiac);
 		for(int i = 1;i<13;i++)
 			comboBoxMiesiac.addItem(i);
 		
-		final JComboBox comboBoxRok = new JComboBox();
+		final JComboBox<Integer> comboBoxRok = new JComboBox<Integer>();
 		comboBoxRok.setBounds(226, 130, 53, 20);
 		add(comboBoxRok);
 		for(int i =1970;i<2020;i++)
@@ -107,10 +110,10 @@ public class addStudent_GUI extends JPanel {
 		lblKlasa.setBounds(10, 154, 100, 14);
 		add(lblKlasa);
 		
-		final ArrayList<SchoolClass> klasy =  (ArrayList<SchoolClass>) MSC.getAllSchoolClasses();
+		final ArrayList<SchoolClass> klasy =  ManageSchoolClass.getAllSchoolClasses();
 				
 		
-		final JComboBox comboBox = new JComboBox();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(114, 154, 68, 20);
 		add(comboBox);
 		for(int i =0;i<klasy.size();i++)
@@ -130,10 +133,11 @@ public class addStudent_GUI extends JPanel {
 		
 		JButton btnDodaj = new JButton("Dodaj");
 		btnDodaj.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				ManageStudent MS = new ManageStudent();
+				
 				int wybrana_klasa = comboBox.getSelectedIndex();				
-				MS.addStudent(klasy.get(wybrana_klasa), imie_txt.getText(), nazwisko_txt.getText(), pesel_txt.getText(), haslo_txt.getText(), new Date((int)comboBoxDzien.getSelectedItem(),(int)comboBoxMiesiac.getSelectedItem(),(int)comboBoxRok.getSelectedItem()), adres_txt.getText());
+				ManageStudent.addStudent(klasy.get(wybrana_klasa), imie_txt.getText(), nazwisko_txt.getText(), pesel_txt.getText(), haslo_txt.getText(), new Date((int)comboBoxDzien.getSelectedItem(),(int)comboBoxMiesiac.getSelectedItem(),(int)comboBoxRok.getSelectedItem()), adres_txt.getText());
 			}
 		});
 		btnDodaj.setBounds(114, 199, 89, 23);

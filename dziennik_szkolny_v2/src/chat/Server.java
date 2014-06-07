@@ -196,7 +196,7 @@ public class Server {
 					writeMsg("Zosta³eœ wylogowany\n");	
 					keepGoing = false;
 					break;
-				case ChatMessage.Action.WHOISIN:
+				case ChatMessage.Action.WHOISON:
 					writeMsg("Lista obecnych  " + sdf.format(new Date()) + "\n");					
 					for(int i = 0; i < al.size(); ++i) {
 						ClientThread ct = al.get(i);

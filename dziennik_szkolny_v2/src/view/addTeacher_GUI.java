@@ -15,6 +15,10 @@ import controller.ManageSubject;
 import controller.ManageTeacher;
 
 public class addTeacher_GUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField imie_txt;
 	private JTextField nazwisko_txt;
 	private JTextField pesel_txt;
@@ -23,9 +27,7 @@ public class addTeacher_GUI extends JPanel {
 
 	
 	public addTeacher_GUI() {
-		setLayout(null);
-		final ManageSubject MS = new ManageSubject();
-		
+		setLayout(null);		
 		
 		
 		JLabel lblImi = new JLabel("Imi\u0119:");
@@ -77,9 +79,9 @@ public class addTeacher_GUI extends JPanel {
 		lblPrzedmiot.setBounds(10, 137, 79, 14);
 		add(lblPrzedmiot);
 		
-		final ArrayList<Subject> przedmioty =  MS.getAllSubjects();
+		final ArrayList<Subject> przedmioty =  ManageSubject.getAllSubjects();
 		
-		final JComboBox comboBox = new JComboBox();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(91, 134, 109, 20);
 		add(comboBox);
 		for(int i =0;i<przedmioty.size();i++)

@@ -25,14 +25,18 @@ import controller.ManageSubject;
 import controller.ManageTeacher;
 
 public class AddSchoolClass_GUI extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txt_class_name;
-	private JList list_subjects;
+	private JList<Object> list_subjects;
 	private JButton btnZapisz;
 
 	/**
 	 * Create the panel.
 	 */
-	private JComboBox comboBox_ClassMaster;
+	private JComboBox<String> comboBox_ClassMaster;
 	public AddSchoolClass_GUI() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -57,10 +61,9 @@ public class AddSchoolClass_GUI extends JPanel {
 		JLabel lblWychowawca = new JLabel("Wychowawca:");
 		panel.add(lblWychowawca);
 		
-		 comboBox_ClassMaster = new JComboBox();
-		panel.add(comboBox_ClassMaster);
-		ManageTeacher MT = new ManageTeacher();
-		final ArrayList<Teacher> teachers = (ArrayList<Teacher>) MT.getAllTeachers();
+		 comboBox_ClassMaster = new JComboBox<String>();
+		panel.add(comboBox_ClassMaster);		
+		final ArrayList<Teacher> teachers = (ArrayList<Teacher>) ManageTeacher.getAllTeachers();
 		for(int i =0;i<teachers.size();i++)
 		{
 			comboBox_ClassMaster.addItem(teachers.get(i).getLastName()+" "+teachers.get(i).getFirstName());
@@ -70,12 +73,17 @@ public class AddSchoolClass_GUI extends JPanel {
 		add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		DefaultListModel model = new DefaultListModel<>();
+		DefaultListModel<Object> model = new DefaultListModel<>();
 		
-		 list_subjects = new JList(model);
+		 list_subjects = new JList<Object>(model);
 		 list_subjects.setValueIsAdjusting(true);
 		 list_subjects.setSelectionModel(new DefaultListSelectionModel() {
-			    @Override
+			    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+				@Override
 			    public void setSelectionInterval(int index0, int index1) {
 			        if(super.isSelectedIndex(index0)) {
 			            super.removeSelectionInterval(index0, index1);
@@ -93,8 +101,7 @@ public class AddSchoolClass_GUI extends JPanel {
 		scrollPane.setViewportView(list_subjects);
 		
 		/**moze zmienic na jtable**/
-		final ManageSubject MS = new ManageSubject();
-		final ArrayList<model.Subject> przedmioty =  MS.getAllSubjects();
+		final ArrayList<model.Subject> przedmioty =  ManageSubject.getAllSubjects();
 		for(int i =0;i<przedmioty.size();i++)
 		{
 			model.add(i,przedmioty.get(i).getName());
@@ -112,12 +119,12 @@ public class AddSchoolClass_GUI extends JPanel {
 		 	int SchoolClassID =	MSC.addSchoolClass(teachers.get(comboBox_ClassMaster.getSelectedIndex()), txt_class_name.getText(), yearStart.getValue()+"", ((Integer)yearStart.getValue()+1)+"");
 		 		SchoolClass schoolClass = MSC.getSchoolClass(SchoolClassID);
 		 	int[] selected =	list_subjects.getSelectedIndices();
-		 	ManageSubject MS = new ManageSubject();
+		 
 		 	for(int i =0;i<selected.length;i++)
 		 	{
 		 		schoolClass.getSubjects().add(przedmioty.get(selected[i]));
 		 	}
-		 	MSC.updateDB(schoolClass);
+		 	ManageSchoolClass.updateSchoolClass(schoolClass);
 		 	}
 		 	
 		 });

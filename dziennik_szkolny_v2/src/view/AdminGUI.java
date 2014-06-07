@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 
 public class AdminGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Container contentPane;
 	private CardLayout layout;
 
@@ -78,15 +82,36 @@ public class AdminGUI extends JFrame {
 		
 		JMenuItem mntmPrzedmiot_1 = new JMenuItem("Przedmiot");
 		mnEdytuj.add(mntmPrzedmiot_1);
+		mntmPrzedmiot_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane,"PrzedmiotEdit");
+			}
+		});
 		
 		JMenuItem mntmNauczyciel_1 = new JMenuItem("Nauczyciel");
 		mnEdytuj.add(mntmNauczyciel_1);
+		mntmNauczyciel_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane,"NauczycielEdit");
+			}
+		});
+		
 		
 		JMenuItem mntmUcze_1 = new JMenuItem("Ucze\u0144");
 		mnEdytuj.add(mntmUcze_1);
+		mntmUcze_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane,"UczenEdit");
+			}
+		});
 		
 		JMenuItem mntmKlasa_1 = new JMenuItem("Klasa");
 		mnEdytuj.add(mntmKlasa_1);
+		mntmKlasa_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				layout.show(contentPane,"KlasaEdit");
+			}
+		});
 		
 		JMenu mnUsu = new JMenu("Usu\u0144");
 		menuBar.add(mnUsu);
@@ -116,6 +141,18 @@ public class AdminGUI extends JFrame {
 		
 		JPanel addSchoolClass = new AddSchoolClass_GUI();
 		contentPane.add("Klasa",addSchoolClass);
+		
+		JPanel editSubject = new EditSubject_GUI();
+		contentPane.add("PrzedmiotEdit",editSubject);
+		
+		JPanel editTeacher = new EditTeacher_GUI();
+		contentPane.add("NauczycielEdit",editTeacher);
+		
+		JPanel editStudent = new EditStudent_GUI();
+		contentPane.add("UczenEdit",editStudent);
+		
+		JPanel editSchoolClass = new EditSchoolClass_GUI();
+		contentPane.add("KlasaEdit",editSchoolClass);
 		
 		
 		

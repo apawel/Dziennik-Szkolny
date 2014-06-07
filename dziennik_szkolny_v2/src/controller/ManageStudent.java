@@ -3,9 +3,11 @@ package controller;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import model.SchoolClass;
 import model.Student;
+import model.Teacher;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -44,8 +46,45 @@ public class ManageStudent extends HibernateDaoSupport {
 		         return student;
 		      
 	   }
+	  static   public void updateStudent(Student student)
+	   {
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;		   
+		      try{
+		         tx = session.beginTransaction();
+		         session.update(student); 		
+		         tx.commit();
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+	   }
+	  static public ArrayList<Student> getAllStudents()
+	   {
+		
+		   Session session = HibernateUtil.getSessionFactory().openSession();
+		      Transaction tx = null;
+		      ArrayList<Student> students = null;
+		      try{
+		         tx = session.beginTransaction();		      
+		         students  = (ArrayList<Student>) session.createQuery("FROM Student").list();				
+		         tx.commit(); 
+		         
+		      }catch (HibernateException e) {
+		         if (tx!=null) tx.rollback();
+		         e.printStackTrace(); 
+		      }finally {
+		         session.close(); 
+		      }
+		         return students;
+		   
+	   }
+	  
 	/* Method to DELETE an student from the records */
-	  public Integer addStudent(SchoolClass schoolClass, String firstName, String lastName,
+	  public static Integer addStudent(SchoolClass schoolClass, String firstName, String lastName,
 				String personalIdentityNumber, String password, Date dateOfBirth,
 				String address){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
@@ -65,7 +104,7 @@ public class ManageStudent extends HibernateDaoSupport {
 	      return studentID;
 	   }
 	  
-	  public Student getStudentbyPIN(String Pin) throws Exception
+	  public static Student getStudentbyPIN(String Pin) throws Exception
 	   {
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;
@@ -91,7 +130,7 @@ public class ManageStudent extends HibernateDaoSupport {
 	   }
 	
 	   /* Method to DELETE an student from the records */
-	   public void deleteStudent(Integer studentID){
+	   public static void deleteStudent(Integer studentID){
 	      Session session = HibernateUtil.getSessionFactory().openSession();
 	      Transaction tx = null;
 	      try{

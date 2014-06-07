@@ -20,6 +20,10 @@ import controller.ManageSchoolClass;
 
 public class Teacher_GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	public Teacher_GUI(final Teacher teacher) {	
@@ -43,12 +47,11 @@ public class Teacher_GUI extends JFrame {
 		contentPane.add(lbl_prowadzonyprzeznauczycielaprzedmiot);
 		/*klasy ktore uczeszczaja na dany przedmiot*/
 		ArrayList<SchoolClass> klasy = new ArrayList<>();
-		ManageSchoolClass MSC = new ManageSchoolClass();
-		klasy=(ArrayList<SchoolClass>) MSC.getAllSchoolClasses();
+		klasy=(ArrayList<SchoolClass>) ManageSchoolClass.getAllSchoolClasses();
 		final ArrayList<SchoolClass> klasy_nauczyciela = new ArrayList<>();
 		
 		
-		final JComboBox comboBox = new JComboBox();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(90, 49, 164, 20);
 		contentPane.add(comboBox);
 		

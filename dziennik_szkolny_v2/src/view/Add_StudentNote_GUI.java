@@ -17,6 +17,10 @@ import controller.ManageStudentNote;
 
 public class Add_StudentNote_GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextPane txt_Note;
 
@@ -43,8 +47,8 @@ public class Add_StudentNote_GUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(txt_Note.getText().length()!=0)
 				{
-					ManageStudentNote MSN = new ManageStudentNote();
-					MSN.addStudentNote(student_subject.getTeacher(), student_subject.getStudent(), txt_Note.getText());
+					
+					ManageStudentNote.addStudentNote(student_subject.getTeacher(), student_subject.getStudent(), txt_Note.getText());
 					dispose();
 				}
 				

@@ -197,8 +197,8 @@ public class Login_GUI {
 		if (txt_pesel.getText().length() != 11)
 			throw new NumberFormatException();
 //moze zmienic na pobranie calej klasy i wybranie ucznia.....
-		ManageStudent MS = new ManageStudent();
-		student = MS.getStudentbyPIN(txt_pesel.getText());
+		
+		student = ManageStudent.getStudentbyPIN(txt_pesel.getText());
 		char[] password = passwordField.getPassword();
 
 		if (isCorrect(student.getPassword().toCharArray(), password))
@@ -246,7 +246,7 @@ public class Login_GUI {
 		btnZamknij.setBounds(20, 147, 108, 29);
 		frame.getContentPane().add(btnZamknij);
 
-		final JComboBox comboBox = new JComboBox();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(69, 107, 154, 20);
 		frame.getContentPane().add(comboBox);
 		comboBox.addItem("Uczen");
