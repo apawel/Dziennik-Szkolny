@@ -20,6 +20,11 @@ package controller;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+/**
+ * UZC WRRAPER EXAMPLE W POBRANYCH !!!!!!!!!!
+ * @author Pawel
+ *
+ */
 public class Push {
 	public static void main(String[] args) {
 		String APP_ID = "0OzZHchfwt0mPcV5S9W2SeDk7GvI5Hcar717dcme";
@@ -45,7 +50,7 @@ public class Push {
 
 		Process curlProc;
 		try {
-		    curlProc = Runtime.getRuntime().exec("cmd");// +command);
+		    curlProc = Runtime.getRuntime().exec("command");
 
 		    DataInputStream curlIn = new DataInputStream(
 		            curlProc.getInputStream());

@@ -1,4 +1,4 @@
-Imiê i nazwisko: Zygmunt Wazonik Adres: Krakow, Czarnowiejska 5 Data urodzenia: 1992-05-22
-Imiê i nazwisko: Oliwa Rurek Adres: Krakow, Czarnowiejska 5 Data urodzenia: 1992-05-22
 Imiê i nazwisko: Piotr Iksinski Adres: Krakow, Czarnowiejska 5 Data urodzenia: 1992-05-22
+Imiê i nazwisko: Zygmunt Wazonik Adres: Krakow, Czarnowiejska 5 Data urodzenia: 1992-05-22
 Imiê i nazwisko: Pawe³ B Adres: Krakow, Czarnowiejska 5 Data urodzenia: 1992-05-22
+Imiê i nazwisko: Oliwa Rurek Adres: Krakow, Czarnowiejska 5 Data urodzenia: 1992-05-22

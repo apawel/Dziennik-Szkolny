@@ -22,6 +22,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
 import model.Student;
+import controller.GeneratePDFZeb;
 import controller.ManageStudent;
 
 
@@ -121,6 +122,7 @@ boolean correct = false;
 	private JPasswordField passwordField;
 	private JTextField txt_messages;
 	private JScrollPane scrollPane;
+	private JButton btnZapisZebrania;
 
 	public static void main(String[] args) {
 		new Client_GUI();
@@ -200,6 +202,11 @@ boolean correct = false;
 		btnKtoJestDostpny.addActionListener(this);
 		btnKtoJestDostpny.setEnabled(false);
 		
+		btnZapisZebrania = new JButton("Zapis zebrania");
+		gora_.add(btnZapisZebrania);
+		btnZapisZebrania.addActionListener(this);
+		btnZapisZebrania.setEnabled(false);
+		
 		JPanel dol_ = new JPanel();
 		splitPane.setRightComponent(dol_);
 		dol_.setLayout(new BorderLayout(0, 0));
@@ -248,6 +255,15 @@ boolean correct = false;
 		if(o == btnKtoJestDostpny) {
 			client.sendMessage(new ChatMessage(ChatMessage.Action.WHOISON, ""));				
 			return;
+		}
+		if(o == btnZapisZebrania)
+		{
+			GeneratePDFZeb gPDf = new GeneratePDFZeb();
+			gPDf.GeneratePDFZebranie(textArea.getText());
+			btnZapisZebrania.setEnabled(false);
+			return;
+			
+			
 		}
 
 		
@@ -305,7 +321,8 @@ boolean correct = false;
 			connected = true;			
 			btnPocz.setEnabled(false);			
 			btnWyloguj.setEnabled(true);
-			btnKtoJestDostpny.setEnabled(true);			
+			btnKtoJestDostpny.setEnabled(true);		
+			btnZapisZebrania.setEnabled(true);
 			txt_adres_serwara.setEditable(false);
 			txt_port.setEditable(false);			
 			txt_messages.addActionListener(this);
@@ -315,6 +332,8 @@ boolean correct = false;
 	void append(String str) {
 		textArea.append(str);
 		textArea.setCaretPosition(textArea.getText().length() - 1);
+		if(!btnZapisZebrania.isEnabled())
+		btnZapisZebrania.setEnabled(true);
 	}
 	
 	
