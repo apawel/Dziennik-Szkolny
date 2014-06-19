@@ -1,0 +1,1 @@
+C:\xampp\apache\bin\curl   --sslv3 --insecure -X PUT -H "X-Parse-Application-Id: KxbAkP9fVFoQVX965kF5ly97pIDc9RsSy7ft32JO" -H "X-Parse-REST-API-Key: bhvqrOnEm2Anamr1sKZNxmu0rJQ49OkoTg0vYh3G" -H "Content-Type: application/json" -d  '{       "channels": [          "Zebrania"        ], "data": {"alert": "The Giants won against the Mets 2-3."        }}' https://api.parse.com/1/push

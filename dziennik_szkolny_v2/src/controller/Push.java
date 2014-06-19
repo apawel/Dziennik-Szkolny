@@ -46,11 +46,15 @@ public class Push {
 		String command = "curl -X POST \\" + header + "-d {"+ "channels" +": ["+   ""+','+    "Mets"+"    ], "+"data"+": {"+     "alert"+':'+ "The Giants won against the Mets 2-3." + '}'+"}' \\ https://api.parse.com/1/push";
 	
 
-		System.out.println(command);
-
+	//	System.out.println(command);
+				String[] x = new String[3];
+				x[0] = "cmd";
+				x[1] = "/c";
+				x[2] = command;
+				
 		Process curlProc;
 		try {
-		    curlProc = Runtime.getRuntime().exec("command");
+		    curlProc = Runtime.getRuntime().exec(x);
 
 		    DataInputStream curlIn = new DataInputStream(
 		            curlProc.getInputStream());

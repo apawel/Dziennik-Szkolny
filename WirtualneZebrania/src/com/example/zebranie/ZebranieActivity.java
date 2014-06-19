@@ -1,10 +1,10 @@
 package com.example.zebranie;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +12,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.zebranie.R;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
@@ -20,11 +19,13 @@ import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.PushService;
 
 public class ZebranieActivity extends Activity {
 	private ListView zebraniaList;
 	private ZebranieAdapter taskAdapter;
+	private Context context;
 
 	@Override
 	public void onResume() {
@@ -38,6 +39,7 @@ public class ZebranieActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_to_do);
 
+		 context = getApplicationContext();
 		// inicjalizacja Parse
 		Parse.initialize(this, "KxbAkP9fVFoQVX965kF5ly97pIDc9RsSy7ft32JO",
 				"CnocIFbYpf17uHtyLqffsPB1kvVnMle7j5JXUhRC");			
@@ -46,8 +48,12 @@ public class ZebranieActivity extends Activity {
 		ParseObject.registerSubclass(Zebranie.class);// polaczenie z klasa
 		PushService.setDefaultPushCallback(this, ZebranieActivity.class);
 		ParseInstallation.getCurrentInstallation().saveInBackground();
+		if (ParseUser.getCurrentUser() == null) {
+            ParseUser.enableAutomaticUser();
+     }
+		PushService.subscribe(context, "Zebrania", ZebranieActivity.class);
 
-	//	context = getApplicationContext();
+
 		zebraniaList = (ListView) findViewById(R.id.taskList);
 
 		taskAdapter = new ZebranieAdapter(this, new ArrayList<Zebranie>());
@@ -57,7 +63,7 @@ public class ZebranieActivity extends Activity {
 		Zebranie zebranie = new Zebranie();
 		zebranie.setCompleted(false);
 		zebranie.setDescription("localhost:3355");
-		zebranie.setDate(new Date(time+200000000));
+		zebranie.setDate(new Date(time+900000000));
 		zebranie.saveInBackground();*/
 		
 		zebraniaList.setOnItemClickListener(new OnItemClickListener() {
