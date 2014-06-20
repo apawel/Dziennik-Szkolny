@@ -97,8 +97,8 @@ public class Class_Master_GUI extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton = new JButton("Wirtualne Zebranie");
-		panel_1.add(btnNewButton);
+		JButton btnVirtualMeeting = new JButton("Wirtualne Zebranie");
+		panel_1.add(btnVirtualMeeting);
 		JButton btnWybierzUcznia = new JButton("Wybierz ucznia");
 		panel_1.add(btnWybierzUcznia);
 		btnWybierzUcznia.addActionListener(new ActionListener() {
@@ -128,11 +128,11 @@ public class Class_Master_GUI extends JFrame {
 		panel_2.add(lista_uczniow);
 		lista_uczniow.setVisibleRowCount(20);
 		lista_uczniow.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		btnNewButton.addActionListener(new ActionListener() {
+		btnVirtualMeeting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Server_GUI server_gui= new Server_GUI();
-				server_gui.setVisible(true);
-				Client_GUI_Teacher CGT = new Client_GUI_Teacher(schoolClass.getTeacher());
+				
+				VirtualMeeting vm = new VirtualMeeting(schoolClass.getTeacher());
+			
 			}
 		});
 		

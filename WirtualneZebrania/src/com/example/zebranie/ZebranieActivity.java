@@ -1,6 +1,7 @@
 package com.example.zebranie;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -36,14 +37,15 @@ public class ZebranieActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// inicjalizacja Parse
+		Parse.initialize(this, "KxbAkP9fVFoQVX965kF5ly97pIDc9RsSy7ft32JO",
+				"CnocIFbYpf17uHtyLqffsPB1kvVnMle7j5JXUhRC");	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_to_do);
 
+	
+			
 		 context = getApplicationContext();
-		// inicjalizacja Parse
-		Parse.initialize(this, "KxbAkP9fVFoQVX965kF5ly97pIDc9RsSy7ft32JO",
-				"CnocIFbYpf17uHtyLqffsPB1kvVnMle7j5JXUhRC");			
-		
 		ParseAnalytics.trackAppOpened(getIntent());
 		ParseObject.registerSubclass(Zebranie.class);// polaczenie z klasa
 		PushService.setDefaultPushCallback(this, ZebranieActivity.class);
@@ -58,13 +60,11 @@ public class ZebranieActivity extends Activity {
 
 		taskAdapter = new ZebranieAdapter(this, new ArrayList<Zebranie>());
 		zebraniaList.setAdapter(taskAdapter);
-	/*	Date data = new Date();
-		long time = data.getTime();
 		Zebranie zebranie = new Zebranie();
 		zebranie.setCompleted(false);
 		zebranie.setDescription("localhost:3355");
-		zebranie.setDate(new Date(time+900000000));
-		zebranie.saveInBackground();*/
+		zebranie.setDate("dzis");
+		zebranie.saveInBackground();
 		
 		zebraniaList.setOnItemClickListener(new OnItemClickListener() {
 
@@ -75,7 +75,7 @@ public class ZebranieActivity extends Activity {
 				TextView taskDescription = (TextView) view.findViewById(R.id.task_description);
 				taskDescription.setText("Zebranie:"
 						+ "\nData: "
-						+ zebranie.getDate().toLocaleString()
+						+ zebranie.getDate()
 						+ "\nAdres:port : " 
 						+ zebranie.getDescription());
 

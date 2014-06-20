@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +19,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import controller.PushNotification;
 
 public class Server_GUI extends JFrame implements ActionListener, WindowListener{
 
@@ -138,6 +142,17 @@ public class Server_GUI extends JFrame implements ActionListener, WindowListener
 		new ServerRunning().start();
 		btnRozpocznijZebranie.setText("Zakoñcz zebranie");
 		txt_port.setEditable(false);
+		
+	    String[] channels = new String[]{"Zebrania"};
+	    String type = "android";
+	    Map<String, String> data = new HashMap<String, String>();
+	    data.put("alert", "Zebranie serwer: localhost port:"+ port);
+
+	    try {
+	        new PushNotification().sendPost(channels, type, data);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	class ServerRunning extends Thread {

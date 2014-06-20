@@ -28,11 +28,11 @@ public class Zebranie extends ParseObject {
 		put("description", description);
 	}
 
-	public Date getDate() {
-		return getDate("date");
+	public String getDate() {
+		return getString("date");
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		put("date", date);
 	}
 }

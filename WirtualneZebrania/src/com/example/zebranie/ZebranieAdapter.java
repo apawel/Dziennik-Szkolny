@@ -36,15 +36,15 @@ public class ZebranieAdapter extends ArrayAdapter<Zebranie> {
 		TextView view = (TextView) convertView
 				.findViewById(R.id.task_description);
 		Date data = new Date();
-		view.setText("Zebranie:"
+		view.setText("Zebranie"
 				+ "\nData: "
-				+ zebranie.getDate().toLocaleString());
+				+ zebranie.getDate());
 				
 
-		if (zebranie.getDate().getTime() <= data.getTime()
-				&& !zebranie.isCompleted()) {
-			zebranie.setCompleted(true);
-		}
+	//	if (new Date(zebranie.getDate()).getTime() <= data.getTime()
+	//			&& !zebranie.isCompleted()) {
+	//		zebranie.setCompleted(true);
+	//	}
 		if (zebranie.isCompleted()) {
 			view.setPaintFlags(view.getPaintFlags()
 					| Paint.STRIKE_THRU_TEXT_FLAG);
