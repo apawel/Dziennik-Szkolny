@@ -2,27 +2,22 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.SchoolClass;
 import model.Subject;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 
 import utils.HibernateUtil;
 
-public class ManageSubject extends HibernateDaoSupport {
+public class ManageSubject {
 	
 	public ManageSubject()
 	{
 		
 	}
-	/*save Subject*/
-	public void saveSubject(Subject subject)
-	{
-		getHibernateTemplate().save(subject);
-	}
+
 	/*get all Subjects*/
 	/*public ArrayList<Subject> getAllSubjects()
 	{

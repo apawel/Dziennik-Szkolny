@@ -47,13 +47,13 @@ public class GeneratePDF {
 			smallBold = new Font(bf, 12,
 				      Font.BOLD);	  
 		} catch (DocumentException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}  
 	  }
 	  public void GeneratePDFClass(SchoolClass schoolClass)
 	  {
-		  Iterator it = schoolClass.getStudents().iterator();
+		  Iterator<Student> it = schoolClass.getStudents().iterator();
 		 while(it.hasNext())
 		 {
 			  Student student = (Student) it.next();

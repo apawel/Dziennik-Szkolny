@@ -3,23 +3,16 @@ package controller;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import model.SchoolClass;
-import model.Subject;
 import model.Teacher;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import utils.HibernateUtil;
 
-public class ManageSchoolClass extends HibernateDaoSupport{
+public class ManageSchoolClass {
 	public ManageSchoolClass()
 	{		
 	}
@@ -27,11 +20,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	
 	
 
-	/*save school class*/
-	public void saveSchoolClass(SchoolClass schoolClass)
-	{
-		getHibernateTemplate().update(schoolClass);
-	}
+
 	 /* Method to CREATE an SchoolClass in the database */
 	   public Integer addSchoolClass(Teacher teacher, String name, String yearStart,String yearEnd){
 	      Session session =  HibernateUtil.getSessionFactory().openSession();
@@ -79,21 +68,7 @@ public class ManageSchoolClass extends HibernateDaoSupport{
 	   }
 	   
 	   
-	   /*to co wyzej ale inaczej*/
-	   public ArrayList<SchoolClass> getAllSchoolClassBySubject(Integer subjectID)
-	   {
-		   ArrayList list = (ArrayList) getSession().createCriteria(SchoolClass.class)
-	                .add(Restrictions.eq("Subject.idSubject", subjectID))
-	                .list();
-		   Iterator it = (Iterator) list.iterator();
-			for(int i =0;i<list.size();i++)
-			{
-			
-				System.out.println("Klasa: " + ((SchoolClass) list.get(i)).getName());
-			}
-	 
-	        return list;   
-	   }
+
 	   public SchoolClass getSchoolClass(Integer schoolClassID){
 		   Session session = HibernateUtil.getSessionFactory().openSession();
 		      Transaction tx = null;

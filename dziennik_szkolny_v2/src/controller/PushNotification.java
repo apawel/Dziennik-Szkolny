@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +10,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-import org.springframework.dao.DataAccessResourceFailureException;
+
+@SuppressWarnings("deprecation")
 public class PushNotification {
 
 	private static final String APPLICATION_ID = "KxbAkP9fVFoQVX965kF5ly97pIDc9RsSy7ft32JO";
@@ -52,7 +52,8 @@ public class PushNotification {
 	    this.pushObject(jo.toString());
 	}
 	private void pushObject(String postData) throws Exception {
-	    DefaultHttpClient httpclient = new DefaultHttpClient();
+	    @SuppressWarnings({ "resource" })
+		DefaultHttpClient httpclient = new DefaultHttpClient();
 	    HttpResponse response = null;
 	    HttpEntity entity = null;
 	    String responseString = null;
@@ -84,7 +85,8 @@ public class PushNotification {
 	}
 
 	private void pushData(String postData) throws Exception {
-	    DefaultHttpClient httpclient = new DefaultHttpClient();
+	    @SuppressWarnings({ "resource" })
+		DefaultHttpClient httpclient = new DefaultHttpClient();
 	    HttpResponse response = null;
 	    HttpEntity entity = null;
 	    String responseString = null;

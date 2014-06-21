@@ -12,11 +12,10 @@ import model.Teacher;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageStudentNote extends HibernateDaoSupport {
+public class ManageStudentNote  {
 	public ManageStudentNote()
 	{
 		

@@ -3,8 +3,6 @@ package controller;
 
 
 import java.util.ArrayList;
-import java.util.List;
-
 import model.Subject;
 import model.Teacher;
 
@@ -12,11 +10,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageTeacher extends HibernateDaoSupport{
+public class ManageTeacher {
 
 	
 	static   public void updateTeacher(Teacher teacher)
@@ -35,11 +32,7 @@ public class ManageTeacher extends HibernateDaoSupport{
 		         session.close(); 
 		      }
 	   }
-/*save teacher*/
-public void saveTeacher(Teacher teacher)
-{
-	getHibernateTemplate().save(teacher);
-}
+
 	 /* Method to CREATE an teacher in the database */
 	   public Integer addTeacher(Subject subject, String firstName, String lastName,
 				String personalIdentityNumber, String password, String address){
@@ -98,13 +91,7 @@ public void saveTeacher(Teacher teacher)
 	   }
 
 	    
-	/*get by pin w innej wersji*/
-	   
-	   public Teacher findTeacherbyPIN(String Pin)
-	   {
-	    return (Teacher) getSession().createCriteria(Teacher.class).add(Restrictions.eqOrIsNull("personalIdentityNumber", Pin)).uniqueResult();
-	   }
-	   
+
 		 public Teacher getTeacherbyPIN(String Pin) throws Exception
 			   {
 				   Session session = HibernateUtil.getSessionFactory().openSession();

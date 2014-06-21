@@ -7,25 +7,17 @@ import java.util.ArrayList;
 
 import model.SchoolClass;
 import model.Student;
-import model.Teacher;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import utils.HibernateUtil;
 
-public class ManageStudent extends HibernateDaoSupport {
+public class ManageStudent  {
 	public ManageStudent()
 	{
-		
-	}
-	/*save Student*/
-	public void saveStudent(Student student)
-	{
-		getHibernateTemplate().save(student);
 		
 	}
 	  public Student getStudentbyId(Integer studentID){
@@ -62,7 +54,8 @@ public class ManageStudent extends HibernateDaoSupport {
 		         session.close(); 
 		      }
 	   }
-	  static public ArrayList<Student> getAllStudents()
+	  @SuppressWarnings("unchecked")
+	static public ArrayList<Student> getAllStudents()
 	   {
 		
 		   Session session = HibernateUtil.getSessionFactory().openSession();
