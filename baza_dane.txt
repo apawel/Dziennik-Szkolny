@@ -1,0 +1,260 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.7
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Czas wygenerowania: 21 Cze 2014, 14:13
+-- Wersja serwera: 5.0.51
+-- Wersja PHP: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Baza danych: `plysiu_apawel`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `pushnotifications`
+--
+
+CREATE TABLE IF NOT EXISTS `pushnotifications` (
+  `IDPUSHNOTIFICATIONS` int(11) NOT NULL,
+  `PESEL` varchar(11) collate utf8_polish_ci NOT NULL,
+  `DEVICE` text collate utf8_polish_ci NOT NULL,
+  PRIMARY KEY  (`IDPUSHNOTIFICATIONS`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `pushnotifications`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `schoolclass`
+--
+
+CREATE TABLE IF NOT EXISTS `schoolclass` (
+  `idSchoolClass` int(11) NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_polish_ci NOT NULL,
+  `yearStart` varchar(4) collate utf8_polish_ci NOT NULL,
+  `yearEnd` varchar(4) collate utf8_polish_ci NOT NULL,
+  `ClassMaster_idTeacher` int(11) NOT NULL,
+  PRIMARY KEY  (`idSchoolClass`),
+  KEY `fk_SchoolClass_Teacher1_idx` (`ClassMaster_idTeacher`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=6 ;
+
+--
+-- Zrzut danych tabeli `schoolclass`
+--
+
+INSERT INTO `schoolclass` (`idSchoolClass`, `name`, `yearStart`, `yearEnd`, `ClassMaster_idTeacher`) VALUES
+(1, '1D', '2013', '2014', 1),
+(5, '2a', '2016', '2017', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `schoolclass_has_subject`
+--
+
+CREATE TABLE IF NOT EXISTS `schoolclass_has_subject` (
+  `SchoolClass_idSchoolClass` int(11) NOT NULL default '0',
+  `Subject_idSubject` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`Subject_idSubject`,`SchoolClass_idSchoolClass`),
+  KEY `FK_5qjkwhgqebygdbykx4r91iys3` (`SchoolClass_idSchoolClass`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `schoolclass_has_subject`
+--
+
+INSERT INTO `schoolclass_has_subject` (`SchoolClass_idSchoolClass`, `Subject_idSubject`) VALUES
+(1, 17),
+(1, 18),
+(1, 19),
+(5, 19),
+(1, 20),
+(5, 20),
+(1, 21),
+(1, 22),
+(5, 22),
+(1, 23),
+(5, 23),
+(5, 49);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `student`
+--
+
+CREATE TABLE IF NOT EXISTS `student` (
+  `idStudent` int(11) NOT NULL auto_increment,
+  `firstName` varchar(45) collate utf8_polish_ci NOT NULL,
+  `lastName` varchar(45) collate utf8_polish_ci NOT NULL,
+  `personalIdentityNumber` varchar(11) collate utf8_polish_ci NOT NULL,
+  `password` varchar(45) collate utf8_polish_ci NOT NULL,
+  `dateOfBirth` date NOT NULL,
+  `SchoolClass_idSchoolClass` int(11) NOT NULL,
+  `address` varchar(45) collate utf8_polish_ci NOT NULL,
+  PRIMARY KEY  (`idStudent`),
+  UNIQUE KEY `personalIdentityNumber` (`personalIdentityNumber`),
+  KEY `fk_Student_SchoolClass1_idx` (`SchoolClass_idSchoolClass`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=5 ;
+
+--
+-- Zrzut danych tabeli `student`
+--
+
+INSERT INTO `student` (`idStudent`, `firstName`, `lastName`, `personalIdentityNumber`, `password`, `dateOfBirth`, `SchoolClass_idSchoolClass`, `address`) VALUES
+(1, 'Pawe³', 'B', '00011122233', '123', '1992-05-22', 1, 'Krakow, Czarnowiejska 5'),
+(2, 'Piotr', 'Iksinski', '00001112223', '123', '1992-05-22', 1, 'Krakow, Czarnowiejska 5'),
+(3, 'Oliwa', 'Rurek', '00000111223', '123', '1992-05-22', 1, 'Krakow, Czarnowiejska 5'),
+(4, 'Zygmunt', 'Wazonik', '10000011122', '123', '1992-05-22', 1, 'Krakow, Czarnowiejska 5');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `studentnote`
+--
+
+CREATE TABLE IF NOT EXISTS `studentnote` (
+  `idStudentNote` int(11) NOT NULL auto_increment,
+  `Teacher_idTeacher` int(11) NOT NULL,
+  `Student_idStudent` int(11) NOT NULL,
+  `noteContents` longtext collate utf8_polish_ci NOT NULL,
+  PRIMARY KEY  (`idStudentNote`),
+  KEY `FK_9oteskp8n1fbd7afgv1wjkbv8` (`Teacher_idTeacher`),
+  KEY `FK_fk59b0sswg84tmepiymju64n2` (`Student_idStudent`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=6 ;
+
+--
+-- Zrzut danych tabeli `studentnote`
+--
+
+INSERT INTO `studentnote` (`idStudentNote`, `Teacher_idTeacher`, `Student_idStudent`, `noteContents`) VALUES
+(1, 1, 4, 'Zygmunt jest niemi³y dla kole¿anek'),
+(2, 1, 4, 'Pobi³ kolegê'),
+(3, 1, 4, 'Obrazi³ nauczyciela'),
+(4, 1, 3, 'Niegrzeczna'),
+(5, 1, 4, 'Treœæ uwagi');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `subject`
+--
+
+CREATE TABLE IF NOT EXISTS `subject` (
+  `idSubject` int(11) NOT NULL auto_increment,
+  `name` varchar(45) collate utf8_polish_ci NOT NULL,
+  PRIMARY KEY  (`idSubject`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=50 ;
+
+--
+-- Zrzut danych tabeli `subject`
+--
+
+INSERT INTO `subject` (`idSubject`, `name`) VALUES
+(21, 'Angielski'),
+(23, 'Biologia'),
+(19, 'Chemia'),
+(18, 'Fizyka'),
+(22, 'Niemiecki'),
+(17, 'Platformy Agentowe'),
+(20, 'Polski'),
+(49, 'Wieloskalowe'),
+(24, 'Wychowanie Fizyczne');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `subjectmark`
+--
+
+CREATE TABLE IF NOT EXISTS `subjectmark` (
+  `idSubjectMark` int(11) NOT NULL auto_increment,
+  `timeStamp` datetime NOT NULL,
+  `Student_idStudent` int(11) NOT NULL,
+  `Subject_idSubject` int(11) NOT NULL,
+  `value` double NOT NULL,
+  `weight` int(11) NOT NULL,
+  `description` varchar(45) collate utf8_polish_ci default NULL,
+  PRIMARY KEY  (`idSubjectMark`),
+  KEY `FK_g2xv42dmvnwhfvtnt2koqd9oc` (`Student_idStudent`),
+  KEY `FK_dtubmmsf8994so18ndv3odu1v` (`Subject_idSubject`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=11 ;
+
+--
+-- Zrzut danych tabeli `subjectmark`
+--
+
+INSERT INTO `subjectmark` (`idSubjectMark`, `timeStamp`, `Student_idStudent`, `Subject_idSubject`, `value`, `weight`, `description`) VALUES
+(1, '2014-05-16 12:27:23', 4, 17, 1, 3, 'Sprawdzian'),
+(2, '2014-05-16 13:20:29', 4, 17, 1, 1, 'OdpowiedŸ ustna'),
+(3, '2014-05-16 13:20:33', 4, 17, 1, 1, 'Kartkówka'),
+(4, '2014-05-16 14:38:17', 4, 18, 5, 3, 'Sprawdzian'),
+(5, '2014-05-16 14:39:04', 4, 17, 4, 2, 'Kolos'),
+(6, '2014-05-17 12:48:37', 4, 17, 3.5, 2, 'Zadanie'),
+(7, '2014-05-22 12:03:17', 3, 17, 3, 2, 'Za nic'),
+(8, '2014-05-27 15:38:28', 2, 17, 2.5, 3, 'Kolokwium'),
+(9, '2014-05-27 15:42:25', 1, 17, 2.5, 2, 'Za nic'),
+(10, '2014-06-08 13:51:57', 1, 17, 3, 3, 'Projekt');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `teacher`
+--
+
+CREATE TABLE IF NOT EXISTS `teacher` (
+  `idTeacher` int(11) NOT NULL auto_increment,
+  `firstName` varchar(45) collate utf8_polish_ci NOT NULL,
+  `lastName` varchar(45) collate utf8_polish_ci NOT NULL,
+  `personalIdentityNumber` varchar(11) collate utf8_polish_ci NOT NULL,
+  `password` varchar(45) collate utf8_polish_ci NOT NULL,
+  `Subject_idSubject` int(11) NOT NULL,
+  `address` varchar(45) collate utf8_polish_ci NOT NULL,
+  PRIMARY KEY  (`idTeacher`),
+  KEY `fk_Teacher_Subject1_idx` (`Subject_idSubject`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=5 ;
+
+--
+-- Zrzut danych tabeli `teacher`
+--
+
+INSERT INTO `teacher` (`idTeacher`, `firstName`, `lastName`, `personalIdentityNumber`, `password`, `Subject_idSubject`, `address`) VALUES
+(1, 'Pawel', 'Wojciechowski', '92062410079', '1234', 17, 'kraków, Grunwaldzka 5'),
+(2, 'Przemyslaw', 'Plys', '12345678912', '1234', 18, 'Zakopane, Grunwald 78'),
+(3, 'Aneta', 'Gora', '01234567891', '1234', 19, 'Krakow, Czarnowiejska 5'),
+(4, 'Aga', 'Kowalsa', '11234567890', '1234', 20, 'Gdañsk, Grunwaldzka 5');
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `schoolclass`
+--
+ALTER TABLE `schoolclass`
+  ADD CONSTRAINT `FK_oa60jv4q71npspvc5jto6l8sb` FOREIGN KEY (`ClassMaster_idTeacher`) REFERENCES `teacher` (`idTeacher`),
+  ADD CONSTRAINT `fk_SchoolClass_Teacher1` FOREIGN KEY (`ClassMaster_idTeacher`) REFERENCES `teacher` (`idTeacher`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ograniczenia dla tabeli `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `FK_rs9np57m9qsgbot5h66ie8amc` FOREIGN KEY (`SchoolClass_idSchoolClass`) REFERENCES `schoolclass` (`idSchoolClass`),
+  ADD CONSTRAINT `fk_Student_SchoolClass1` FOREIGN KEY (`SchoolClass_idSchoolClass`) REFERENCES `schoolclass` (`idSchoolClass`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ograniczenia dla tabeli `teacher`
+--
+ALTER TABLE `teacher`
+  ADD CONSTRAINT `FK_lb7m7yd6r41435if3bixllgtw` FOREIGN KEY (`Subject_idSubject`) REFERENCES `subject` (`idSubject`),
+  ADD CONSTRAINT `fk_Teacher_Subject1` FOREIGN KEY (`Subject_idSubject`) REFERENCES `subject` (`idSubject`) ON DELETE NO ACTION ON UPDATE NO ACTION;
